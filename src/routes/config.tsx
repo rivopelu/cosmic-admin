@@ -2,12 +2,14 @@ import SignInPage from '@/pages/auth/SignInPage'
 import AccountListPage from '../pages/account/AccountList'
 import DetailAccountPage from '../pages/account/DetailAccountPage'
 import App from '../pages/App'
+import type { PageLayoutType } from '@/types/types/type'
 
 export interface RouteConfig {
   module: string
   path?: string
   component?: React.ComponentType
   children?: RouteConfig[]
+  type?: PageLayoutType
 }
 
 export const routesConfig: RouteConfig[] = [
@@ -15,11 +17,13 @@ export const routesConfig: RouteConfig[] = [
     module: 'home',
     path: '/',
     component: App,
+    type: 'PRIMARY',
   },
   {
     module: 'auth',
     path: '/auth',
     component: SignInPage,
+    type: 'FULL_SCREEN',
   },
   {
     module: 'account',

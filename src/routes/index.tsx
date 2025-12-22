@@ -1,5 +1,6 @@
-import { createRoute, type AnyRoute } from '@tanstack/react-router'
+import { createRoute, type AnyRoute, Outlet } from '@tanstack/react-router'
 import { routesConfig, type RouteConfig } from './config'
+import MainLayout from './MainLayout'
 
 export function createAppRoutes(rootRoute: AnyRoute) {
   const generateRoutes = (
@@ -9,10 +10,21 @@ export function createAppRoutes(rootRoute: AnyRoute) {
     return configs.map((config) => {
       const currentPath = config.path || ''
 
+      const Component = config.component
+      const WrappedComponent = () => {
+        const content = Component ? <Component /> : <Outlet />
+
+        if (config.type) {
+          return <MainLayout type={config.type}>{content}</MainLayout>
+        }
+
+        return content
+      }
+
       const route = createRoute({
         getParentRoute: () => parentRoute,
         path: currentPath,
-        component: config.component as any,
+        component: WrappedComponent,
       })
 
       if (config.children && config.children.length > 0) {
