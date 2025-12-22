@@ -1,3 +1,3 @@
 export default function App() {
-  return <div>App</div>
+  return <div className="bg-blue-800 w-full min-h-screen">App</div>
 }

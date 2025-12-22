@@ -31,10 +31,11 @@ export default function SignInPage() {
                 />
                 <Spacer size="md" />
                 <Button
+                  loading={page.mutateSignIn.isPending}
                   onClick={() => page.formik.handleSubmit()}
                   type="submit"
                 >
-                  Submit
+                  SIGN IN
                 </Button>
               </div>
             </CardContent>

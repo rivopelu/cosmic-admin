@@ -1,4 +1,9 @@
-import { createRoute, type AnyRoute, Outlet } from '@tanstack/react-router'
+import {
+  createRoute,
+  type AnyRoute,
+  Outlet,
+  redirect,
+} from '@tanstack/react-router'
 import { routesConfig, type RouteConfig } from './config'
 import MainLayout from './MainLayout'
 
@@ -25,6 +30,18 @@ export function createAppRoutes(rootRoute: AnyRoute) {
         getParentRoute: () => parentRoute,
         path: currentPath,
         component: WrappedComponent,
+        beforeLoad: ({ location, context }) => {
+          const auth = (context as any).auth
+          const isAuthPath = location.pathname.startsWith('/auth')
+
+          if (isAuthPath && auth.isAuthenticated) {
+            throw redirect({ to: '/' })
+          }
+
+          if (!isAuthPath && !auth.isAuthenticated) {
+            throw redirect({ to: '/auth' })
+          }
+        },
       })
 
       if (config.children && config.children.length > 0) {
