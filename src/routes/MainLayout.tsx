@@ -1,5 +1,9 @@
 import { AppSidebar } from '@/components/AppSidebar'
-import { SidebarProvider } from '@/components/ui/sidebar'
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar'
 import type { PageLayoutType } from '@/types/types/type'
 import type { ReactNode } from 'react'
 
@@ -9,7 +13,12 @@ export default function MainLayout({ children, type }: IProps) {
       return (
         <SidebarProvider>
           <AppSidebar />
-          {children}
+          <SidebarInset>
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
+              <SidebarTrigger className="-ml-1" />
+            </header>
+            <div className="flex flex-1 flex-col gap-4 p-4">{children}</div>
+          </SidebarInset>
         </SidebarProvider>
       )
     case 'FULL_SCREEN':
