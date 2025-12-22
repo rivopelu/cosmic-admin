@@ -1,3 +1,4 @@
+import SignInPage from '@/pages/auth/SignInPage'
 import AccountListPage from '../pages/account/AccountList'
 import DetailAccountPage from '../pages/account/DetailAccountPage'
 import App from '../pages/App'
@@ -14,6 +15,11 @@ export const routesConfig: RouteConfig[] = [
     module: 'home',
     path: '/',
     component: App,
+  },
+  {
+    module: 'auth',
+    path: '/auth',
+    component: SignInPage,
   },
   {
     module: 'account',
