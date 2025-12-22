@@ -29,8 +29,8 @@ export function useSignInPage() {
   })
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: 'rivo@maxxitani.id',
+      password: '@Rivopelu123',
     },
     validationSchema: Yup.object({
       email: Yup.string().email('Invalid email address').required('Required'),

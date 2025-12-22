@@ -16,6 +16,7 @@ export class AuthService {
       token,
       account,
     }))
+    window.location.href = '/'
   }
 
   public static logout() {

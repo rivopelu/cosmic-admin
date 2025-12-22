@@ -1,3 +1,13 @@
+import { Button } from '@/components/ui/button'
+import { AuthService } from '@/services/auth.service'
+
 export default function App() {
-  return <div className="bg-blue-800 w-full min-h-screen">App</div>
+  return (
+    <div className=" w-full min-h-screen">
+      App
+      <div>
+        <Button onClick={AuthService.logout}>LOGOUT</Button>
+      </div>
+    </div>
+  )
 }

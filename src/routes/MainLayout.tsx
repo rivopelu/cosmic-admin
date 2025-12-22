@@ -1,4 +1,5 @@
-import Sidebar from '@/components/Sidebar'
+import { AppSidebar } from '@/components/AppSidebar'
+import { SidebarProvider } from '@/components/ui/sidebar'
 import type { PageLayoutType } from '@/types/types/type'
 import type { ReactNode } from 'react'
 
@@ -6,10 +7,10 @@ export default function MainLayout({ children, type }: IProps) {
   switch (type) {
     case 'PRIMARY':
       return (
-        <>
-          <Sidebar />
-          <div className="ml-sidebar">{children}</div>
-        </>
+        <SidebarProvider>
+          <AppSidebar />
+          {children}
+        </SidebarProvider>
       )
     case 'FULL_SCREEN':
       return <>{children}</>
