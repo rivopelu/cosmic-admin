@@ -1,0 +1,19 @@
+{
+  "projectName": "cosmic-admin",
+  "mode": "code-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "npm",
+  "addOnOptions": {},
+  "git": true,
+  "version": 1,
+  "framework": "react-cra",
+  "chosenAddOns": [
+    "eslint",
+    "tanstack-query",
+    "compiler",
+    "shadcn",
+    "t3env",
+    "store"
+  ]
+}
