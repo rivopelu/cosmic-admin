@@ -24,7 +24,7 @@ export default function MainLayout({ children, type }: IProps) {
         ;<>{children}</>
     }
   }
-  return <main className="bg-slate-100">{checking()}</main>
+  return <main className="bg-slate-50">{checking()}</main>
 }
 
 interface IProps {

@@ -1,5 +1,7 @@
-import { Home, User } from 'lucide-react'
+import { Home, User, ChevronRight, ChevronDown } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 
 import {
   Sidebar,
@@ -10,9 +12,19 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
 
-const items = [
+type Item = {
+  title: string
+  url: string
+  icon?: any
+  children?: Item[]
+}
+
+const items: Item[] = [
   {
     title: 'Home',
     url: '/',
@@ -24,13 +36,135 @@ const items = [
     icon: User,
     children: [
       {
+        title: 'Creator',
+        url: '/account',
+        icon: User,
+      },
+      {
         title: 'Profile',
-        url: '/account/profile',
+        url: '/account',
         icon: User,
       },
     ],
   },
 ]
+
+function SidebarItem({ item }: { item: Item }) {
+  const [isClicked, setIsClicked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const hasChildren = item.children && item.children.length > 0
+
+  const isOpen = isClicked || isHovered
+
+  if (hasChildren) {
+    return (
+      <SidebarMenuItem
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <SidebarMenuButton onClick={() => setIsClicked((prev) => !prev)}>
+          {item.icon && <item.icon />}
+          <span>{item.title}</span>
+          <div className="ml-auto">
+            {isOpen ? (
+              <ChevronDown className="h-4 w-4" />
+            ) : (
+              <ChevronRight className="h-4 w-4" />
+            )}
+          </div>
+        </SidebarMenuButton>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ overflow: 'hidden' }}
+            >
+              <SidebarMenuSub>
+                {item.children?.map((child) => (
+                  <SidebarSubItem key={child.title} item={child} />
+                ))}
+              </SidebarMenuSub>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </SidebarMenuItem>
+    )
+  }
+
+  return (
+    <SidebarMenuItem>
+      <SidebarMenuButton asChild>
+        <Link to={item.url}>
+          {item.icon && <item.icon />}
+          <span>{item.title}</span>
+        </Link>
+      </SidebarMenuButton>
+    </SidebarMenuItem>
+  )
+}
+
+function SidebarSubItem({ item }: { item: Item }) {
+  const [isClicked, setIsClicked] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const hasChildren = item.children && item.children.length > 0
+
+  const isOpen = isClicked || isHovered
+
+  if (hasChildren) {
+    return (
+      <SidebarMenuSubItem
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <SidebarMenuSubButton
+          onClick={() => setIsClicked((prev) => !prev)}
+          className="cursor-pointer"
+        >
+          {item.icon && <item.icon />}
+          <span>{item.title}</span>
+          <div className="ml-auto">
+            {isOpen ? (
+              <ChevronDown className="h-4 w-4" />
+            ) : (
+              <ChevronRight className="h-4 w-4" />
+            )}
+          </div>
+        </SidebarMenuSubButton>
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              style={{ overflow: 'hidden' }}
+            >
+              <SidebarMenuSub>
+                {item.children?.map((child) => (
+                  <SidebarSubItem key={child.title} item={child} />
+                ))}
+              </SidebarMenuSub>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </SidebarMenuSubItem>
+    )
+  }
+
+  return (
+    <SidebarMenuSubItem>
+      <SidebarMenuSubButton asChild>
+        <Link to={item.url}>
+          {item.icon && <item.icon />}
+          <span>{item.title}</span>
+        </Link>
+      </SidebarMenuSubButton>
+    </SidebarMenuSubItem>
+  )
+}
 
 export function AppSidebar() {
   return (
@@ -43,14 +177,7 @@ export function AppSidebar() {
           <SidebarGroupContent className="mt-3">
             <SidebarMenu>
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <Link to={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </Link>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <SidebarItem key={item.title} item={item} />
               ))}
             </SidebarMenu>
           </SidebarGroupContent>

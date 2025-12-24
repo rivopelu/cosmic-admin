@@ -5,7 +5,6 @@ import {
   redirect,
 } from '@tanstack/react-router'
 import { routesConfig, type RouteConfig } from './config'
-import MainLayout from './MainLayout'
 
 export function createAppRoutes(rootRoute: AnyRoute) {
   const generateRoutes = (
@@ -18,11 +17,6 @@ export function createAppRoutes(rootRoute: AnyRoute) {
       const Component = config.component
       const WrappedComponent = () => {
         const content = Component ? <Component /> : <Outlet />
-
-        if (config.type) {
-          return <MainLayout type={config.type}>{content}</MainLayout>
-        }
-
         return content
       }
 
@@ -30,6 +24,9 @@ export function createAppRoutes(rootRoute: AnyRoute) {
         getParentRoute: () => parentRoute,
         path: currentPath,
         component: WrappedComponent,
+        staticData: {
+          layout: config.type,
+        },
         beforeLoad: ({ location, context }) => {
           const auth = (context as any).auth
           const isAuthPath = location.pathname.startsWith('/auth')

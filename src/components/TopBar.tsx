@@ -1,5 +1,6 @@
+import { AuthService } from '@/services/auth.service'
 import { LogIn, Settings, User } from 'lucide-react'
-import { Button } from './ui/button'
+import PageContainer from './PageContainer'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,8 +9,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
-import { AuthService } from '@/services/auth.service'
-import PageContainer from './PageContainer'
 
 export default function TopBar() {
   return (
