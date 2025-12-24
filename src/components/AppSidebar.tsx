@@ -22,6 +22,13 @@ const items = [
     title: 'Account',
     url: '/account',
     icon: User,
+    children: [
+      {
+        title: 'Profile',
+        url: '/account/profile',
+        icon: User,
+      },
+    ],
   },
 ]
 
@@ -30,8 +37,10 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
-          <SidebarGroupContent>
+          <SidebarGroupLabel className="h-12">
+            <div className="text-xl font-bold">COSMIC</div>
+          </SidebarGroupLabel>
+          <SidebarGroupContent className="mt-3">
             <SidebarMenu>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
