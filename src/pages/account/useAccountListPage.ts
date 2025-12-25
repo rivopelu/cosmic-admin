@@ -6,6 +6,8 @@ import { AccountRepository } from '@/repositories/AccountRepository'
 export function useAccountListPage() {
   const accountRepository = new AccountRepository()
   const [filterData, setFilterData] = useState<IFilterList>(getInitialFilter())
+  const [openFilter, setOpenFilter] = useState(false)
+  const [searchValue, setSearchValue] = useState(filterData.q)
 
   function getInitialFilter(): IFilterList {
     return {
@@ -22,6 +24,17 @@ export function useAccountListPage() {
   })
   const dataList = queryList.data?.response_data || []
 
+  function handleSearch() {
+    const searchText = searchValue
+    if (searchText) {
+      setFilterData((prev) => ({
+        ...prev,
+        q: searchText,
+        page: 0,
+      }))
+    }
+  }
+
   function handlePaginationChange(params: { page?: number; size?: number }) {
     setFilterData((prev) => ({
       ...prev,
@@ -34,6 +47,7 @@ export function useAccountListPage() {
   }
 
   function handleResetSearch() {
+    setSearchValue('')
     setFilterData((prev) => ({
       ...prev,
       q: '',
@@ -46,5 +60,10 @@ export function useAccountListPage() {
     queryList,
     handlePaginationChange,
     handleResetSearch,
+    openFilter,
+    setOpenFilter,
+    searchValue,
+    setSearchValue,
+    handleSearch,
   }
 }

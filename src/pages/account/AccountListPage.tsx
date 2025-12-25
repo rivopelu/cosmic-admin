@@ -7,6 +7,8 @@ import { Badge } from '@/components/ui/badge'
 import AppTable from '@/components/AppTable'
 import AppAvatar from '@/components/AppAvatar'
 import AppPagination from '@/components/AppPagination'
+import FilterList from '@/components/FilterList'
+import InputSearch from '@/components/InputSearch'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -42,6 +44,24 @@ export default function AccountListPage() {
   return (
     <PageContent>
       <PageTitle title="Account List" />
+      <div className="flex justify-between items-center">
+        <InputSearch
+          handleSearch={page.handleSearch}
+          searchValue={page.searchValue}
+          setSearchValue={page.setSearchValue}
+          placeholder="Cari account..."
+          active={!!page.searchValue}
+          handleReset={page.handleResetSearch}
+        />
+        <FilterList
+          open={page.openFilter}
+          onOpenChange={page.setOpenFilter}
+          onReset={page.handleResetSearch}
+          onSubmit={() => {}}
+        >
+          <div>FILTER</div>
+        </FilterList>
+      </div>
       <AppTable
         data={page?.dataList || []}
         column={tableColumn}
