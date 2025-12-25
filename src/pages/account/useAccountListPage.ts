@@ -1,25 +1,26 @@
 import { useQuery } from '@tanstack/react-query'
-import { useNavigate, useSearch } from '@tanstack/react-router'
-import { useEffect, useState } from 'react'
 import type { IFilterList } from '@/types/types/type'
 import { AccountRepository } from '@/repositories/account.repository'
 import MasterDataRepository from '@/repositories/master-data.repositories'
 import type { IResLabelValue } from '@/types/response/IResLabelValue'
 import { ROUTES } from '@/constants/routes'
+import { useTablePage } from '@/hooks/useTablePage'
 
 export function useAccountListPage() {
-  const navigate = useNavigate({ from: ROUTES.ACCOUNT_LIST() })
-  const search = useSearch({ from: ROUTES.ACCOUNT_LIST() }) as IFilterList
-
   const accountRepository = new AccountRepository()
   const masterDataRepository = new MasterDataRepository()
 
-  const [openFilter, setOpenFilter] = useState(false)
-  const [searchValue, setSearchValue] = useState(search.q || '')
-
-  useEffect(() => {
-    setSearchValue(search.q || '')
-  }, [search.q])
+  const {
+    search,
+    searchValue,
+    setSearchValue,
+    openFilter,
+    setOpenFilter,
+    handleSearch,
+    handlePaginationChange,
+    handleResetSearch,
+    handleFilterApply,
+  } = useTablePage<IFilterList>(ROUTES.ACCOUNT_LIST())
 
   const filterData: IFilterList = {
     q: search.q,
@@ -48,50 +49,6 @@ export function useAccountListPage() {
   const dataFilterRole = queryListRole.data || ([] as IResLabelValue<string>[])
   const dataFilterStatus =
     queryListStatus.data || ([] as IResLabelValue<string>[])
-
-  function handleSearch() {
-    navigate({
-      search: (prev: IFilterList) => ({
-        ...prev,
-        q: searchValue || undefined,
-        page: 0,
-      }),
-    })
-  }
-
-  function handlePaginationChange(params: { page?: number; size?: number }) {
-    navigate({
-      search: (prev: IFilterList) => ({
-        ...prev,
-        page:
-          params.size !== undefined && params.size !== prev.size
-            ? 0
-            : (params.page ?? prev.page),
-        size: params.size ?? prev.size,
-      }),
-    })
-  }
-
-  function handleResetSearch() {
-    setSearchValue('')
-    navigate({
-      search: () => ({
-        page: 0,
-        size: 10,
-      }),
-    })
-  }
-
-  function handleFilterApply(values: IFilterList) {
-    navigate({
-      search: (prev: IFilterList) => ({
-        ...prev,
-        ...values,
-        page: 0,
-      }),
-    })
-    setOpenFilter(false)
-  }
 
   const activeFilter = filterData.role || filterData.status
 

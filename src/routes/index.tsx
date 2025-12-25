@@ -44,7 +44,7 @@ export function createAppRoutes(rootRoute: AnyRoute) {
 
       if (config.children && config.children.length > 0) {
         const children = generateRoutes(config.children, route)
-        return route.addChildren(children)
+        route.addChildren(children)
       }
 
       return route
