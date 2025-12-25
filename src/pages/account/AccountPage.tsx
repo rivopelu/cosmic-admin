@@ -1,22 +1,8 @@
-import { useAccountPage } from './useAccountPage'
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table'
-import { Input } from '@/components/ui/input'
-import { Button } from '@/components/ui/button'
+import type { ITableColumn } from '@/components/AppTable'
+import AppTable from '@/components/AppTable'
+import PageTitle from '@/components/PageTitle'
 import { Badge } from '@/components/ui/badge'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -24,7 +10,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Filter, ChevronLeft, ChevronRight, Search } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { ROUTES } from '@/constants/routes'
+import type { IResCreatorList } from '@/types/response/IResCreatorList'
+import { ChevronLeft, ChevronRight, Filter, Search } from 'lucide-react'
+import { useAccountPage } from './useAccountPage'
 
 const STATUS_OPTIONS = ['PENDING', 'VERIFIED']
 
@@ -43,10 +40,36 @@ export default function AccountPage() {
     setSize,
   } = useAccountPage()
 
+  const tableColumn: ITableColumn<IResCreatorList>[] = [
+    {
+      headerTitle: 'Artist Name',
+      component: (data) => data.artist_name,
+    },
+    {
+      headerTitle: 'Username',
+      component: (data) => data.username,
+    },
+    {
+      headerTitle: 'Creator Type',
+      component: (data) => data.creator_type,
+    },
+    {
+      headerTitle: 'Status',
+      component: (data) => (
+        <Badge variant={data.status === 'VERIFIED' ? 'default' : 'secondary'}>
+          {data.status}
+        </Badge>
+      ),
+    },
+  ]
+
   return (
     <div className="p-6 flex flex-col gap-6 w-full">
       <div className="flex flex-col gap-4">
-        <h1 className="text-2xl font-bold">Account Management</h1>
+        <PageTitle
+          title="Creator List"
+          breadcrumb={[{ path: ROUTES.CREATOR_LIST(), label: 'Creator List' }]}
+        />
 
         <div className="flex items-center gap-2">
           {STATUS_OPTIONS.map((s) => (
@@ -94,52 +117,7 @@ export default function AccountPage() {
         </Dialog>
       </div>
 
-      <div className="border rounded-md">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Artist Name</TableHead>
-              <TableHead>Username</TableHead>
-              <TableHead>Creator Type</TableHead>
-              <TableHead>Status</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={4} className="h-24 text-center">
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : data.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={4} className="h-24 text-center">
-                  No accounts found.
-                </TableCell>
-              </TableRow>
-            ) : (
-              data.map((item, idx) => (
-                <TableRow key={idx}>
-                  <TableCell className="font-medium">
-                    {item.artist_name}
-                  </TableCell>
-                  <TableCell>{item.username}</TableCell>
-                  <TableCell>{item.creator_type}</TableCell>
-                  <TableCell>
-                    <Badge
-                      variant={
-                        item.status === 'VERIFIED' ? 'default' : 'secondary'
-                      }
-                    >
-                      {item.status}
-                    </Badge>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+      <AppTable data={data} column={tableColumn} loading={isLoading} />
 
       <div className="flex items-center justify-between gap-4 py-4">
         <div className="flex items-center gap-2">
