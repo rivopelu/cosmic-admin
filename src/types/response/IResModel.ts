@@ -1,4 +1,5 @@
-import { type AxiosResponse } from 'axios'
+import type { AxiosResponse } from 'axios'
+
 export interface IPaginatedParams {
   page: number
   size: number
@@ -19,7 +20,7 @@ export interface IHeaderTabs {
   activeIcons?: string
 }
 
-interface rootResponse<T> {
+export interface rootResponse<T> {
   response_data: T
 }
 
@@ -27,7 +28,7 @@ interface rootResponseMessage {
   response_data: string
 }
 
-interface rootResponsePaginated<T> {
+export interface rootResponsePaginated<T> {
   response_data: T
   paginated_data: IResPaginatedData
 }

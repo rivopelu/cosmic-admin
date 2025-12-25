@@ -34,17 +34,17 @@ const items: Item[] = [
   },
   {
     title: 'Account',
-    url: '/account',
+    url: ROUTES.ACCOUNT_LIST(),
     icon: User,
     children: [
       {
-        title: 'Creator',
-        url: ROUTES.CREATOR_LIST(),
+        title: 'Account',
+        url: ROUTES.ACCOUNT_LIST(),
         icon: User,
       },
       {
-        title: 'Profile',
-        url: '/account',
+        title: 'Creator',
+        url: ROUTES.CREATOR_LIST(),
         icon: User,
       },
     ],

@@ -1,4 +1,7 @@
+import { ChevronLeft, ChevronRight, Filter, Search } from 'lucide-react'
+import { useCreatorListPage } from './useCreatorListPage'
 import type { ITableColumn } from '@/components/AppTable'
+import type { IResCreatorList } from '@/types/response/IResCreatorList'
 import AppTable from '@/components/AppTable'
 import PageTitle from '@/components/PageTitle'
 import { Badge } from '@/components/ui/badge'
@@ -19,9 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { ROUTES } from '@/constants/routes'
-import type { IResCreatorList } from '@/types/response/IResCreatorList'
-import { ChevronLeft, ChevronRight, Filter, Search } from 'lucide-react'
-import { useCreatorListPage } from './useCreatorListPage'
+import PageContent from '@/components/PageContent'
 
 const STATUS_OPTIONS = ['PENDING', 'VERIFIED']
 
@@ -40,22 +41,22 @@ export default function CreatorListPage() {
     setSize,
   } = useCreatorListPage()
 
-  const tableColumn: ITableColumn<IResCreatorList>[] = [
+  const tableColumn: Array<ITableColumn<IResCreatorList>> = [
     {
       headerTitle: 'Artist Name',
-      component: (data) => data.artist_name,
+      component: (data: IResCreatorList) => data.artist_name,
     },
     {
       headerTitle: 'Username',
-      component: (data) => data.username,
+      component: (data: IResCreatorList) => data.username,
     },
     {
       headerTitle: 'Creator Type',
-      component: (data) => data.creator_type,
+      component: (data: IResCreatorList) => data.creator_type,
     },
     {
       headerTitle: 'Status',
-      component: (data) => (
+      component: (data: IResCreatorList) => (
         <Badge variant={data.status === 'VERIFIED' ? 'default' : 'secondary'}>
           {data.status}
         </Badge>
@@ -64,7 +65,7 @@ export default function CreatorListPage() {
   ]
 
   return (
-    <div className="p-6 flex flex-col gap-6 w-full">
+    <PageContent>
       <div className="flex flex-col gap-4">
         <PageTitle
           title="Creator List"
@@ -165,6 +166,6 @@ export default function CreatorListPage() {
           </div>
         </div>
       </div>
-    </div>
+    </PageContent>
   )
 }

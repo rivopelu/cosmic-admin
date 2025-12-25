@@ -3,6 +3,7 @@ import SignInPage from '@/pages/auth/SignInPage'
 import type { PageLayoutType } from '@/types/types/type'
 import App from '../pages/App'
 import { ROUTES } from '@/constants/routes'
+import AccountListPage from '@/pages/account/AccountListPage'
 
 export interface RouteConfig {
   module: string
@@ -23,6 +24,12 @@ export const routesConfig: RouteConfig[] = [
     module: 'account',
     path: ROUTES.CREATOR_LIST(),
     component: CreatorListPage,
+    type: 'PRIMARY',
+  },
+  {
+    module: 'account',
+    path: ROUTES.ACCOUNT_LIST(),
+    component: AccountListPage,
     type: 'PRIMARY',
   },
   {
