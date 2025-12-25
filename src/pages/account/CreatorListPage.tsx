@@ -21,11 +21,11 @@ import {
 import { ROUTES } from '@/constants/routes'
 import type { IResCreatorList } from '@/types/response/IResCreatorList'
 import { ChevronLeft, ChevronRight, Filter, Search } from 'lucide-react'
-import { useAccountPage } from './useAccountPage'
+import { useCreatorListPage } from './useCreatorListPage'
 
 const STATUS_OPTIONS = ['PENDING', 'VERIFIED']
 
-export default function AccountPage() {
+export default function CreatorListPage() {
   const {
     data,
     pagination,
@@ -38,7 +38,7 @@ export default function AccountPage() {
     setPage,
     size,
     setSize,
-  } = useAccountPage()
+  } = useCreatorListPage()
 
   const tableColumn: ITableColumn<IResCreatorList>[] = [
     {

@@ -1,7 +1,8 @@
+import CreatorListPage from '@/pages/account/CreatorListPage'
 import SignInPage from '@/pages/auth/SignInPage'
 import type { PageLayoutType } from '@/types/types/type'
 import App from '../pages/App'
-import AccountPage from '@/pages/account/AccountPage'
+import { ROUTES } from '@/constants/routes'
 
 export interface RouteConfig {
   module: string
@@ -20,8 +21,8 @@ export const routesConfig: RouteConfig[] = [
   },
   {
     module: 'account',
-    path: '/account',
-    component: AccountPage,
+    path: ROUTES.CREATOR_LIST(),
+    component: CreatorListPage,
     type: 'PRIMARY',
   },
   {

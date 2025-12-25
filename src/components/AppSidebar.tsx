@@ -17,6 +17,7 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
+import { ROUTES } from '@/constants/routes'
 
 type Item = {
   title: string
@@ -28,7 +29,7 @@ type Item = {
 const items: Item[] = [
   {
     title: 'Home',
-    url: '/',
+    url: ROUTES.HOME(),
     icon: Home,
   },
   {
@@ -38,7 +39,7 @@ const items: Item[] = [
     children: [
       {
         title: 'Creator',
-        url: '/account',
+        url: ROUTES.CREATOR_LIST(),
         icon: User,
       },
       {

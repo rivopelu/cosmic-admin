@@ -5,7 +5,7 @@ import { ENDPOINT } from '@/constants/endpoint'
 import type { BaseResponsePaginated } from '@/types/response/IResModel'
 import type { IResCreatorList } from '@/types/response/IResCreatorList'
 
-export function useAccountPage() {
+export function useCreatorListPage() {
   const httpService = new HttpService()
   const [page, setPage] = useState(0)
   const [size, setSize] = useState(20)
