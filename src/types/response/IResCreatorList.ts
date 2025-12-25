@@ -7,4 +7,5 @@ export interface IResCreatorList {
   creator_type: string
   creator_type_id: string
   status: string
+  created_date?: number
 }

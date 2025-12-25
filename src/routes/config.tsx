@@ -26,6 +26,15 @@ export const routesConfig: RouteConfig[] = [
     path: ROUTES.CREATOR_LIST(),
     component: CreatorListPage,
     type: 'PRIMARY',
+    validateSearch: (search: Record<string, unknown>) => {
+      return {
+        q: (search.q as string) || undefined,
+        page: Number(search.page) || 0,
+        size: Number(search.size) || 10,
+        status: (search.status as string) || undefined,
+        sort: (search.sort as string) || undefined,
+      }
+    },
   },
   {
     module: 'account',
