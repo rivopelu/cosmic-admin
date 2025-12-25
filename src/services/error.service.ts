@@ -1,8 +1,9 @@
+import { toast } from 'sonner'
 import { AuthService } from './auth.service'
 
 export default class ErrorService {
   private handleSnackbar(message: string) {
-    alert(message)
+    toast.error(message)
   }
 
   public fetchApiError(error: any) {
@@ -13,10 +14,8 @@ export default class ErrorService {
         return
       }
 
-      if (error?.response?.data?.errors?.message) {
-        const message =
-          error?.response?.data?.errors?.message ||
-          'Terjadi Kesalahan Pada Sistem'
+      if (error?.response?.data?.message) {
+        const message = error?.response?.data?.message
         this.handleSnackbar(message)
       } else if (
         error?.code === 'ERR_NETWORK' ||

@@ -4,6 +4,7 @@ import TopBar from '@/components/TopBar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import type { PageLayoutType } from '@/types/types/type'
 import type { ReactNode } from 'react'
+import { Toaster } from '@/components/ui/sonner'
 
 export default function MainLayout({ children, type }: IProps) {
   function checking() {
@@ -24,7 +25,13 @@ export default function MainLayout({ children, type }: IProps) {
         ;<>{children}</>
     }
   }
-  return <main className="bg-slate-50">{checking()}</main>
+  return (
+    <main className="bg-slate-50">
+      <Toaster />
+
+      {checking()}
+    </main>
+  )
 }
 
 interface IProps {
