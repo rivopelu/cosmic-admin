@@ -1,16 +1,17 @@
-import type { ITableColumn } from '@/components/AppTable'
-import { useAccountListPage } from './useAccountListPage'
-import PageContent from '@/components/PageContent'
-import PageTitle from '@/components/PageTitle'
-import type { IResAccountList } from '@/types/response/IResAccountList'
-import { Badge } from '@/components/ui/badge'
-import AppTable from '@/components/AppTable'
 import AppAvatar from '@/components/AppAvatar'
 import AppPagination from '@/components/AppPagination'
+import type { ITableColumn } from '@/components/AppTable'
+import AppTable from '@/components/AppTable'
 import FilterList from '@/components/FilterList'
 import InputSearch from '@/components/InputSearch'
-import { Form, Formik } from 'formik'
 import InputSelect from '@/components/InputSelect'
+import PageContent from '@/components/PageContent'
+import PageTitle from '@/components/PageTitle'
+import { Badge } from '@/components/ui/badge'
+import type { IResAccountList } from '@/types/response/IResAccountList'
+import DateHelper from '@/utils/date-helper'
+import { Form, Formik } from 'formik'
+import { useAccountListPage } from './useAccountListPage'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -32,6 +33,15 @@ export default function AccountListPage() {
     {
       headerTitle: 'Email',
       component: (data: IResAccountList) => data.email,
+    },
+    {
+      headerTitle: 'Role',
+      component: (data: IResAccountList) => data.role,
+    },
+    {
+      headerTitle: 'Created Date',
+      component: (data: IResAccountList) =>
+        DateHelper.toFormatDate(data.created_date, 'yyyy-MM-dd HH:mm:ss'),
     },
     {
       headerTitle: 'Status',
@@ -56,7 +66,7 @@ export default function AccountListPage() {
           handleReset={page.handleResetSearch}
         />
         <FilterList
-          active={page.activeFilter}
+          active={!!page.activeFilter}
           open={page.openFilter}
           onOpenChange={page.setOpenFilter}
           onReset={page.handleResetSearch}
@@ -80,6 +90,12 @@ export default function AccountListPage() {
                 label="Account Role"
                 placeholder="Pilih Role"
                 options={page?.dataFilterRole || []}
+              />
+              <InputSelect
+                name="status"
+                label="Account Status"
+                placeholder="Pilih Status"
+                options={page?.dataFilterStatus || []}
               />
             </Form>
           </Formik>

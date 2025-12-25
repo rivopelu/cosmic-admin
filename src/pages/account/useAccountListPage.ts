@@ -26,6 +26,11 @@ export function useAccountListPage() {
     queryFn: async () => await masterDataRepository.getAccountRoles(),
   })
 
+  const queryListStatus = useQuery({
+    queryKey: ['list_account_status'],
+    queryFn: async () => await masterDataRepository.getAccountStatuses(),
+  })
+
   const queryList = useQuery({
     queryKey: ['list_account_list', filterData],
     queryFn: async () => await accountRepository.getAccountList(filterData),
@@ -33,6 +38,8 @@ export function useAccountListPage() {
 
   const dataList = queryList.data?.response_data || []
   const dataFilterRole = queryListRole.data || ([] as IResLabelValue<string>[])
+  const dataFilterStatus =
+    queryListStatus.data || ([] as IResLabelValue<string>[])
 
   function handleSearch() {
     const searchText = searchValue
@@ -89,6 +96,7 @@ export function useAccountListPage() {
     setSearchValue,
     handleSearch,
     dataFilterRole,
+    dataFilterStatus,
     handleFilterApply,
     filterData,
     activeFilter,

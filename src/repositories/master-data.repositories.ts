@@ -19,4 +19,16 @@ export default class MasterDataRepository {
         return []
       })
   }
+
+  getAccountStatuses() {
+    return this.httpService
+      .GET(ENDPOINT.GET_MASTER_DATA_ACCOUNT_STATUSES())
+      .then((res: BaseResponse<IResLabelValue<string>[]>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return []
+      })
+  }
 }

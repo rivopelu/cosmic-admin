@@ -4,4 +4,5 @@ export const ENDPOINT = {
   GET_CREATORS: (params: string) => `/creator?${params}`,
   GET_ACCOUNT_LIST: () => '/admin/accounts',
   GET_MASTER_DATA_ACCOUNT_ROLES: () => '/master-data/account-roles',
+  GET_MASTER_DATA_ACCOUNT_STATUSES: () => '/master-data/account-statuses',
 }
