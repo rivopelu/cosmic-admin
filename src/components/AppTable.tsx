@@ -10,9 +10,35 @@ import {
   TableRow,
 } from './ui/table'
 import CardEmpty from './CardEmpty'
+import { ArrowUpDown, ArrowUp, ArrowDown } from 'lucide-react'
 
 export default function AppTable(props: IProps) {
-  const { data, column, disableBorder, loading } = props
+  const { data, column, disableBorder, loading, onSort, currentSort } = props
+
+  // Parse current sort: "field_name,asc" or "field_name,desc"
+  const parsedSort = currentSort
+    ? { field: currentSort.split(',')[0], direction: currentSort.split(',')[1] }
+    : null
+
+  const getSortIcon = (sortParam?: string) => {
+    if (!sortParam) return null
+
+    const isActive = parsedSort?.field === sortParam
+    if (!isActive) {
+      return <ArrowUpDown className="ml-2 h-4 w-4 inline-block" />
+    }
+
+    return parsedSort?.direction === 'asc' ? (
+      <ArrowUp className="ml-2 h-4 w-4 inline-block" />
+    ) : (
+      <ArrowDown className="ml-2 h-4 w-4 inline-block" />
+    )
+  }
+
+  const handleHeaderClick = (sortParam?: string) => {
+    if (!sortParam || !onSort) return
+    onSort(sortParam)
+  }
 
   return (
     <>
@@ -27,10 +53,14 @@ export default function AppTable(props: IProps) {
                   className={cn(
                     'text-start py-3 font-semibold uppercase',
                     i === 0 && 'pl-4',
+                    header.sortParam &&
+                      'cursor-pointer select-none hover:bg-gray-50',
                   )}
                   key={i}
+                  onClick={() => handleHeaderClick(header.sortParam)}
                 >
                   {header.headerTitle}
+                  {getSortIcon(header.sortParam)}
                 </TableHead>
               ))}
             </TableRow>
@@ -73,9 +103,12 @@ interface IProps {
   column: ITableColumn<any>[]
   disableBorder?: boolean
   loading?: boolean
+  onSort?: (sortParam: string) => void
+  currentSort?: string
 }
 
 export interface ITableColumn<T> {
   headerTitle?: string
   component?: (data: T) => ReactNode
+  sortParam?: string
 }

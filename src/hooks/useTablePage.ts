@@ -60,6 +60,37 @@ export function useTablePage<T extends IFilterList>(routeId: string) {
     setOpenFilter(false)
   }
 
+  function handleSort(sortParam: string) {
+    navigate({
+      search: (prev: T) => {
+        const currentSort = prev.sort
+        const [currentField, currentDirection] = currentSort
+          ? currentSort.split(',')
+          : ['', '']
+
+        let newSort: string | undefined
+
+        if (currentField === sortParam) {
+          // Cycle: asc → desc → no sort
+          if (currentDirection === 'asc') {
+            newSort = `${sortParam},desc`
+          } else if (currentDirection === 'desc') {
+            newSort = undefined
+          }
+        } else {
+          // New field, start with asc
+          newSort = `${sortParam},asc`
+        }
+
+        return {
+          ...prev,
+          sort: newSort,
+          page: 0,
+        } as T
+      },
+    } as any)
+  }
+
   return {
     search,
     searchValue,
@@ -70,5 +101,6 @@ export function useTablePage<T extends IFilterList>(routeId: string) {
     handlePaginationChange,
     handleResetSearch,
     handleFilterApply,
+    handleSort,
   }
 }

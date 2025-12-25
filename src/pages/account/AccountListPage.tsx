@@ -40,6 +40,7 @@ export default function AccountListPage() {
     },
     {
       headerTitle: 'Created Date',
+      sortParam: 'created_date',
       component: (data: IResAccountList) =>
         DateHelper.toFormatDate(data.created_date, 'yyyy-MM-dd HH:mm:ss'),
     },
@@ -105,6 +106,8 @@ export default function AccountListPage() {
         data={page?.dataList || []}
         column={tableColumn}
         loading={page?.queryList.isLoading}
+        onSort={page.handleSort}
+        currentSort={page.search?.sort}
       />
       <AppPagination
         dataPagination={page.queryList?.data?.paginated_data}

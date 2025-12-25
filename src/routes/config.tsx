@@ -39,6 +39,7 @@ export const routesConfig: RouteConfig[] = [
         size: Number(search.size) || 10,
         role: (search.role as string) || undefined,
         status: (search.status as string) || undefined,
+        sort: (search.sort as string) || undefined,
       }
     },
   },

@@ -20,6 +20,7 @@ export function useAccountListPage() {
     handlePaginationChange,
     handleResetSearch,
     handleFilterApply,
+    handleSort,
   } = useTablePage<IFilterList>(ROUTES.ACCOUNT_LIST())
 
   const filterData: IFilterList = {
@@ -65,7 +66,9 @@ export function useAccountListPage() {
     dataFilterRole,
     dataFilterStatus,
     handleFilterApply,
+    handleSort,
     filterData,
     activeFilter,
+    search,
   }
 }
