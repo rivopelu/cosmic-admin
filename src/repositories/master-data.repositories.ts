@@ -10,8 +10,8 @@ export default class MasterDataRepository {
 
   getAccountRoles() {
     return this.httpService
-    .GET(ENDPOINT.GET_MASTER_DATA_ACCOUNT_ROLES())
-      .then((res: BaseResponse<IResLabelValue<string>>) => {
+      .GET(ENDPOINT.GET_MASTER_DATA_ACCOUNT_ROLES())
+      .then((res: BaseResponse<IResLabelValue<string>[]>) => {
         return res.data.response_data
       })
       .catch((e) => {

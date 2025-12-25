@@ -9,6 +9,8 @@ import AppAvatar from '@/components/AppAvatar'
 import AppPagination from '@/components/AppPagination'
 import FilterList from '@/components/FilterList'
 import InputSearch from '@/components/InputSearch'
+import { Form, Formik } from 'formik'
+import InputSelect from '@/components/InputSelect'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -54,12 +56,33 @@ export default function AccountListPage() {
           handleReset={page.handleResetSearch}
         />
         <FilterList
+          active={page.activeFilter}
           open={page.openFilter}
           onOpenChange={page.setOpenFilter}
           onReset={page.handleResetSearch}
-          onSubmit={() => {}}
+          onSubmit={() => {
+            const form = document.getElementById(
+              'filter-form',
+            ) as HTMLFormElement
+            form?.requestSubmit()
+          }}
         >
-          <div>{JSON.stringify(page.dataFilterRole)}</div>
+          <Formik
+            initialValues={{
+              role: page.filterData.role,
+              status: page.filterData.status,
+            }}
+            onSubmit={page.handleFilterApply}
+          >
+            <Form id="filter-form" className="space-y-4">
+              <InputSelect
+                name="role"
+                label="Account Role"
+                placeholder="Pilih Role"
+                options={page?.dataFilterRole || []}
+              />
+            </Form>
+          </Formik>
         </FilterList>
       </div>
       <AppTable

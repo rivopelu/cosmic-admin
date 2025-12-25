@@ -1,4 +1,4 @@
-import { Filter, ListFilter, X } from 'lucide-react'
+import { Filter, X } from 'lucide-react'
 import { Button } from './ui/button'
 import {
   Drawer,
@@ -11,6 +11,7 @@ import {
   DrawerTrigger,
 } from './ui/drawer'
 import { Separator } from './ui/separator'
+import { cn } from '@/lib/utils'
 
 interface Iprops {
   title?: string
@@ -20,6 +21,7 @@ interface Iprops {
   onReset?: () => void
   onSubmit?: () => void
   children?: React.ReactNode
+  active?: boolean
 }
 
 export default function FilterList(props: Iprops) {
@@ -30,8 +32,15 @@ export default function FilterList(props: Iprops) {
       onOpenChange={props.onOpenChange}
     >
       <DrawerTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2 ">
-          <Filter className="size-4" />
+        <Button
+          variant="outline"
+          size="sm"
+          className={cn(
+            'gap-2',
+            props.active ? 'text-primary border-primary' : '',
+          )}
+        >
+          <Filter className="size-4 " />
           Filter
         </Button>
       </DrawerTrigger>

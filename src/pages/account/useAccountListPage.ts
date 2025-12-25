@@ -3,6 +3,7 @@ import { useState } from 'react'
 import type { IFilterList } from '@/types/types/type'
 import { AccountRepository } from '@/repositories/account.repository'
 import MasterDataRepository from '@/repositories/master-data.repositories'
+import type { IResLabelValue } from '@/types/response/IResLabelValue'
 
 export function useAccountListPage() {
   const accountRepository = new AccountRepository()
@@ -31,7 +32,7 @@ export function useAccountListPage() {
   })
 
   const dataList = queryList.data?.response_data || []
-  const dataFilterRole = queryListRole.data || []
+  const dataFilterRole = queryListRole.data || ([] as IResLabelValue<string>[])
 
   function handleSearch() {
     const searchText = searchValue
@@ -61,8 +62,21 @@ export function useAccountListPage() {
       ...prev,
       q: '',
       page: 0,
+      role: undefined,
+      status: undefined,
     }))
   }
+
+  function handleFilterApply(values: IFilterList) {
+    setFilterData((prev) => ({
+      ...prev,
+      ...values,
+      page: 0,
+    }))
+    setOpenFilter(false)
+  }
+
+  const activeFilter = filterData.role || filterData.status
 
   return {
     dataList,
@@ -75,5 +89,8 @@ export function useAccountListPage() {
     setSearchValue,
     handleSearch,
     dataFilterRole,
+    handleFilterApply,
+    filterData,
+    activeFilter,
   }
 }
