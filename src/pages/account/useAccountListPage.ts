@@ -29,6 +29,7 @@ export function useAccountListPage() {
     size: search.size ?? 10,
     role: search.role,
     status: search.status,
+    sort: search.sort,
   }
 
   const queryListRole = useQuery({

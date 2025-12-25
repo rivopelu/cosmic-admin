@@ -20,29 +20,40 @@ export default function AccountListPage() {
     {
       headerTitle: 'Name',
       component: (data: IResAccountList) => (
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           <AppAvatar src={data.profile_picture} alt={data.name} />
-          <div className="font-semibold">{data.name}</div>
+          <div>
+            <div className="font-semibold text-gray-900">{data.name}</div>
+            <div className="text-xs text-gray-500">@{data.username}</div>
+          </div>
         </div>
       ),
     },
     {
-      headerTitle: 'Username',
-      component: (data: IResAccountList) => data.username,
-    },
-    {
       headerTitle: 'Email',
-      component: (data: IResAccountList) => data.email,
+      component: (data: IResAccountList) => (
+        <div className="text-gray-700">{data.email}</div>
+      ),
     },
     {
       headerTitle: 'Role',
-      component: (data: IResAccountList) => data.role,
+      component: (data: IResAccountList) => (
+        <Badge variant="outline" className="font-medium">
+          {data.role}
+        </Badge>
+      ),
     },
     {
       headerTitle: 'Created Date',
       sortParam: 'created_date',
-      component: (data: IResAccountList) =>
-        DateHelper.toFormatDate(data.created_date, 'yyyy-MM-dd HH:mm:ss'),
+      component: (data: IResAccountList) => (
+        <div className="text-gray-600">
+          {DateHelper.toFormatDate(data.created_date, 'MMM dd, yyyy')}
+          <div className="text-xs text-gray-400">
+            {DateHelper.toFormatDate(data.created_date, 'HH:mm:ss')}
+          </div>
+        </div>
+      ),
     },
     {
       headerTitle: 'Status',
@@ -56,13 +67,21 @@ export default function AccountListPage() {
 
   return (
     <PageContent>
-      <PageTitle title="Account List" />
-      <div className="flex justify-between items-center">
+      {/* Page Header */}
+      <div className="mb-6">
+        <PageTitle title="Account Management" />
+        <p className="text-sm text-gray-600 mt-1">
+          Manage and monitor all user accounts in the system
+        </p>
+      </div>
+
+      {/* Search and Filter Section */}
+      <div className="flex justify-between items-center gap-4">
         <InputSearch
           handleSearch={page.handleSearch}
           searchValue={page.searchValue}
           setSearchValue={page.setSearchValue}
-          placeholder="Cari account..."
+          placeholder="Search by name, username, or email..."
           active={!!page.searchValue}
           handleReset={page.handleResetSearch}
         />
@@ -89,30 +108,34 @@ export default function AccountListPage() {
               <InputSelect
                 name="role"
                 label="Account Role"
-                placeholder="Pilih Role"
+                placeholder="Select Role"
                 options={page?.dataFilterRole || []}
               />
               <InputSelect
                 name="status"
                 label="Account Status"
-                placeholder="Pilih Status"
+                placeholder="Select Status"
                 options={page?.dataFilterStatus || []}
               />
             </Form>
           </Formik>
         </FilterList>
       </div>
-      <AppTable
-        data={page?.dataList || []}
-        column={tableColumn}
-        loading={page?.queryList.isLoading}
-        onSort={page.handleSort}
-        currentSort={page.search?.sort}
-      />
-      <AppPagination
-        dataPagination={page.queryList?.data?.paginated_data}
-        onPaginationChange={(e) => page.handlePaginationChange(e)}
-      />
+
+      {/* Table Section */}
+      <div className="space-y-4">
+        <AppTable
+          data={page?.dataList || []}
+          column={tableColumn}
+          loading={page?.queryList.isLoading}
+          onSort={page.handleSort}
+          currentSort={page.search?.sort}
+        />
+        <AppPagination
+          dataPagination={page.queryList?.data?.paginated_data}
+          onPaginationChange={(e) => page.handlePaginationChange(e)}
+        />
+      </div>
     </PageContent>
   )
 }
