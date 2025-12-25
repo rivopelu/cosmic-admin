@@ -1,7 +1,8 @@
 import { Home, User, ChevronRight, ChevronDown } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { cn } from '@/lib/utils'
 
 import {
   Sidebar,
@@ -52,9 +53,15 @@ const items: Item[] = [
 function SidebarItem({ item }: { item: Item }) {
   const [isClicked, setIsClicked] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
+  const router = useRouterState()
   const hasChildren = item.children && item.children.length > 0
+  const isChildActive =
+    hasChildren &&
+    item.children?.some((child) =>
+      router.location.pathname.startsWith(child.url),
+    )
 
-  const isOpen = isClicked || isHovered
+  const isOpen = isClicked || isHovered || isChildActive
 
   if (hasChildren) {
     return (
@@ -62,9 +69,12 @@ function SidebarItem({ item }: { item: Item }) {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <SidebarMenuButton onClick={() => setIsClicked((prev) => !prev)}>
+        <SidebarMenuButton
+          onClick={() => setIsClicked((prev) => !prev)}
+          className={cn(isChildActive && 'text-primary hover:text-primary')}
+        >
           {item.icon && <item.icon />}
-          <span>{item.title}</span>
+          <span className="font-medium">{item.title}</span>
           <div className="ml-auto">
             {isOpen ? (
               <ChevronDown className="h-4 w-4" />
@@ -97,7 +107,12 @@ function SidebarItem({ item }: { item: Item }) {
   return (
     <SidebarMenuItem>
       <SidebarMenuButton asChild>
-        <Link to={item.url}>
+        <Link
+          to={item.url}
+          activeProps={{
+            className: 'text-primary hover:text-primary font-medium',
+          }}
+        >
           {item.icon && <item.icon />}
           <span>{item.title}</span>
         </Link>
@@ -157,7 +172,12 @@ function SidebarSubItem({ item }: { item: Item }) {
   return (
     <SidebarMenuSubItem>
       <SidebarMenuSubButton asChild>
-        <Link to={item.url}>
+        <Link
+          to={item.url}
+          activeProps={{
+            className: 'text-primary hover:text-primary font-medium',
+          }}
+        >
           {item.icon && <item.icon />}
           <span>{item.title}</span>
         </Link>
