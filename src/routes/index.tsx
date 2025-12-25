@@ -24,6 +24,7 @@ export function createAppRoutes(rootRoute: AnyRoute) {
         getParentRoute: () => parentRoute,
         path: currentPath,
         component: WrappedComponent,
+        validateSearch: config.validateSearch,
         staticData: {
           layout: config.type,
         },

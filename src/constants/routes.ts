@@ -1,5 +1,5 @@
 export const ROUTES = {
-    HOME: () => "/",
-    CREATOR_LIST: () => "/account/creator",
-    ACCOUNT_LIST: () => "/account"
+  HOME: () => '/' as const,
+  CREATOR_LIST: () => '/account/creator' as const,
+  ACCOUNT_LIST: () => '/account' as const,
 }

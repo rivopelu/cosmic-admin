@@ -1,24 +1,32 @@
 import { useQuery } from '@tanstack/react-query'
-import { useState } from 'react'
+import { useNavigate, useSearch } from '@tanstack/react-router'
+import { useEffect, useState } from 'react'
 import type { IFilterList } from '@/types/types/type'
 import { AccountRepository } from '@/repositories/account.repository'
 import MasterDataRepository from '@/repositories/master-data.repositories'
 import type { IResLabelValue } from '@/types/response/IResLabelValue'
+import { ROUTES } from '@/constants/routes'
 
 export function useAccountListPage() {
+  const navigate = useNavigate({ from: ROUTES.ACCOUNT_LIST() })
+  const search = useSearch({ from: ROUTES.ACCOUNT_LIST() }) as IFilterList
+
   const accountRepository = new AccountRepository()
   const masterDataRepository = new MasterDataRepository()
-  const [filterData, setFilterData] = useState<IFilterList>(getInitialFilter())
-  const [openFilter, setOpenFilter] = useState(false)
-  const [searchValue, setSearchValue] = useState(filterData.q)
 
-  function getInitialFilter(): IFilterList {
-    return {
-      q: undefined,
-      page: 0,
-      size: 10,
-      status: undefined,
-    }
+  const [openFilter, setOpenFilter] = useState(false)
+  const [searchValue, setSearchValue] = useState(search.q || '')
+
+  useEffect(() => {
+    setSearchValue(search.q || '')
+  }, [search.q])
+
+  const filterData: IFilterList = {
+    q: search.q,
+    page: search.page ?? 0,
+    size: search.size ?? 10,
+    role: search.role,
+    status: search.status,
   }
 
   const queryListRole = useQuery({
@@ -42,44 +50,46 @@ export function useAccountListPage() {
     queryListStatus.data || ([] as IResLabelValue<string>[])
 
   function handleSearch() {
-    const searchText = searchValue
-    if (searchText) {
-      setFilterData((prev) => ({
+    navigate({
+      search: (prev: IFilterList) => ({
         ...prev,
-        q: searchText,
+        q: searchValue || undefined,
         page: 0,
-      }))
-    }
+      }),
+    })
   }
 
   function handlePaginationChange(params: { page?: number; size?: number }) {
-    setFilterData((prev) => ({
-      ...prev,
-      page:
-        params.size !== undefined && params.size !== prev.size
-          ? 0
-          : (params.page ?? prev.page),
-      size: params.size ?? prev.size,
-    }))
+    navigate({
+      search: (prev: IFilterList) => ({
+        ...prev,
+        page:
+          params.size !== undefined && params.size !== prev.size
+            ? 0
+            : (params.page ?? prev.page),
+        size: params.size ?? prev.size,
+      }),
+    })
   }
 
   function handleResetSearch() {
     setSearchValue('')
-    setFilterData((prev) => ({
-      ...prev,
-      q: '',
-      page: 0,
-      role: undefined,
-      status: undefined,
-    }))
+    navigate({
+      search: () => ({
+        page: 0,
+        size: 10,
+      }),
+    })
   }
 
   function handleFilterApply(values: IFilterList) {
-    setFilterData((prev) => ({
-      ...prev,
-      ...values,
-      page: 0,
-    }))
+    navigate({
+      search: (prev: IFilterList) => ({
+        ...prev,
+        ...values,
+        page: 0,
+      }),
+    })
     setOpenFilter(false)
   }
 

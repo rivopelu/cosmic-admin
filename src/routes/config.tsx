@@ -11,6 +11,7 @@ export interface RouteConfig {
   component?: React.ComponentType | (() => Promise<React.ComponentType>) | any
   children?: RouteConfig[]
   type?: PageLayoutType
+  validateSearch?: (search: Record<string, unknown>) => any
 }
 
 export const routesConfig: RouteConfig[] = [
@@ -31,6 +32,15 @@ export const routesConfig: RouteConfig[] = [
     path: ROUTES.ACCOUNT_LIST(),
     component: AccountListPage,
     type: 'PRIMARY',
+    validateSearch: (search: Record<string, unknown>) => {
+      return {
+        q: (search.q as string) || undefined,
+        page: Number(search.page) || 0,
+        size: Number(search.size) || 10,
+        role: (search.role as string) || undefined,
+        status: (search.status as string) || undefined,
+      }
+    },
   },
   {
     module: 'auth',
