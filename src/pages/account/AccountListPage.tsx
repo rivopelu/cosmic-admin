@@ -6,6 +6,7 @@ import type { IResAccountList } from '@/types/response/IResAccountList'
 import { Badge } from '@/components/ui/badge'
 import AppTable from '@/components/AppTable'
 import AppAvatar from '@/components/AppAvatar'
+import AppPagination from '@/components/AppPagination'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -45,6 +46,10 @@ export default function AccountListPage() {
         data={page?.dataList || []}
         column={tableColumn}
         loading={page?.queryList.isLoading}
+      />
+      <AppPagination
+        dataPagination={page.queryList?.data?.paginated_data}
+        onPaginationChange={(e) => page.handlePaginationChange(e)}
       />
     </PageContent>
   )

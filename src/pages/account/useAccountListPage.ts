@@ -22,8 +22,29 @@ export function useAccountListPage() {
   })
   const dataList = queryList.data?.response_data || []
 
+  function handlePaginationChange(params: { page?: number; size?: number }) {
+    setFilterData((prev) => ({
+      ...prev,
+      page:
+        params.size !== undefined && params.size !== prev.size
+          ? 0
+          : (params.page ?? prev.page),
+      size: params.size ?? prev.size,
+    }))
+  }
+
+  function handleResetSearch() {
+    setFilterData((prev) => ({
+      ...prev,
+      q: '',
+      page: 0,
+    }))
+  }
+
   return {
     dataList,
     queryList,
+    handlePaginationChange,
+    handleResetSearch,
   }
 }
