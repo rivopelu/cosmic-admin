@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 import { useState } from 'react'
 import type { IFilterList } from '@/types/types/type'
-import { AccountRepository } from '@/repositories/AccountRepository'
+import { AccountRepository } from '@/repositories/account.repository'
+import MasterDataRepository from '@/repositories/master-data.repositories'
 
 export function useAccountListPage() {
   const accountRepository = new AccountRepository()
+  const masterDataRepository = new MasterDataRepository()
   const [filterData, setFilterData] = useState<IFilterList>(getInitialFilter())
   const [openFilter, setOpenFilter] = useState(false)
   const [searchValue, setSearchValue] = useState(filterData.q)
@@ -18,11 +20,18 @@ export function useAccountListPage() {
     }
   }
 
+  const queryListRole = useQuery({
+    queryKey: ['list_account_role'],
+    queryFn: async () => await masterDataRepository.getAccountRoles(),
+  })
+
   const queryList = useQuery({
     queryKey: ['list_account_list', filterData],
     queryFn: async () => await accountRepository.getAccountList(filterData),
   })
+
   const dataList = queryList.data?.response_data || []
+  const dataFilterRole = queryListRole.data || []
 
   function handleSearch() {
     const searchText = searchValue
@@ -65,5 +74,6 @@ export function useAccountListPage() {
     searchValue,
     setSearchValue,
     handleSearch,
+    dataFilterRole,
   }
 }

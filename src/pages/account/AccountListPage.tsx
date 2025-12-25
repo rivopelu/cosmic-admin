@@ -59,7 +59,7 @@ export default function AccountListPage() {
           onReset={page.handleResetSearch}
           onSubmit={() => {}}
         >
-          <div>FILTER</div>
+          <div>{JSON.stringify(page.dataFilterRole)}</div>
         </FilterList>
       </div>
       <AppTable
