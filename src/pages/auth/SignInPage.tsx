@@ -8,16 +8,16 @@ import { Lock, Mail, Sparkles } from 'lucide-react'
 export default function SignInPage() {
   const page = useSignInPage()
   return (
-    <main className="min-h-screen bg-gradient-to-br from-primary/10 via-purple-50 to-pink-50 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-linear-to-br from-primary/10 via-purple-50 to-pink-50 flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
         {/* Left Section - Branding */}
         <div className="hidden lg:flex flex-col justify-center space-y-6 p-8">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg">
+              <div className="w-12 h-12 rounded-xl bg-linear-to-br from-primary to-purple-600 flex items-center justify-center shadow-lg">
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl font-bold bg-linear-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                 Cosmic Admin
               </h1>
             </div>
@@ -28,7 +28,7 @@ export default function SignInPage() {
 
           <div className="space-y-4">
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <svg
                   className="w-5 h-5 text-primary"
                   fill="none"
@@ -54,7 +54,7 @@ export default function SignInPage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <svg
                   className="w-5 h-5 text-primary"
                   fill="none"
@@ -78,7 +78,7 @@ export default function SignInPage() {
             </div>
 
             <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
                 <svg
                   className="w-5 h-5 text-primary"
                   fill="none"
@@ -110,10 +110,10 @@ export default function SignInPage() {
           <Card className="w-full max-w-md shadow-2xl border-0">
             <CardHeader className="space-y-1 pb-6">
               <div className="flex lg:hidden items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-purple-600 flex items-center justify-center">
+                <div className="w-10 h-10 rounded-lg bg-linear-to-br from-primary to-purple-600 flex items-center justify-center">
                   <Sparkles className="w-5 h-5 text-white" />
                 </div>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-primary to-purple-600 bg-clip-text text-transparent">
+                <h2 className="text-2xl font-bold bg-linear-to-r from-primary to-purple-600 bg-clip-text text-transparent">
                   Cosmic Admin
                 </h2>
               </div>

@@ -1,4 +1,5 @@
 export interface IResCreatorList {
+  id: string
   artist_name: string
   bio: string
   profile_picture: string

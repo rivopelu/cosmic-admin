@@ -71,3 +71,4 @@ export type TypeFormatDate =
   | 'HH:mm:ss'
   | 'dd MMMM yyyy'
   | 'HH:mm'
+  | 'dd MMMM yyyy, HH:mm'

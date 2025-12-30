@@ -12,6 +12,10 @@ import type { IResCreatorList } from '@/types/response/IResCreatorList'
 import DateHelper from '@/utils/date-helper'
 import { Form, Formik } from 'formik'
 import { useCreatorListPage } from './useCreatorListPage'
+import { Link } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
+import { Info } from 'lucide-react'
+import { ROUTES } from '@/constants/routes'
 
 export default function CreatorListPage() {
   const page = useCreatorListPage()
@@ -59,6 +63,16 @@ export default function CreatorListPage() {
         <Badge variant={data.status === 'VERIFIED' ? 'default' : 'secondary'}>
           {data.status}
         </Badge>
+      ),
+    },
+    {
+      headerTitle: '',
+      component: (data: IResCreatorList) => (
+        <Link to={ROUTES.ACCOUNT_DETAIL(data.id)}>
+          <Button variant="outline" size={'icon'}>
+            <Info />
+          </Button>
+        </Link>
       ),
     },
   ]

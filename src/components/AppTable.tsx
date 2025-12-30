@@ -48,7 +48,7 @@ export default function AppTable(props: IProps) {
         <div className="rounded-sm border-gray-200 bg-white  overflow-hidden">
           <Table disableBorder={disableBorder}>
             <TableHeader>
-              <TableRow className="bg-gradient-to-r from-gray-50 to-gray-100 hover:from-gray-50 hover:to-gray-100 border-b-2 border-gray-200">
+              <TableRow className="bg-linear-to-r from-gray-50 to-gray-100 hover:from-gray-50 hover:to-gray-100 border-b-2 border-gray-200">
                 {column.map((header, i) => (
                   <TableHead
                     className={cn(
