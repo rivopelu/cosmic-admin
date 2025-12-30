@@ -6,10 +6,14 @@ import InputSearch from '@/components/InputSearch'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { ROUTES } from '@/constants/routes'
 import type { IResCreatorProduct } from '@/types/response/IResCreatorProduct'
-import DateHelper from '@/utils/date-helper'
-import { useCreatorProductListPage } from './useCreatorProductListPage'
 import { formatCurrency } from '@/utils/currency-helper'
+import DateHelper from '@/utils/date-helper'
+import { InfoIcon } from 'lucide-react'
+import { useCreatorProductListPage } from './useCreatorProductListPage'
+import { Link } from '@tanstack/react-router'
 
 export default function CreatorProductListPage() {
   const page = useCreatorProductListPage()
@@ -79,6 +83,7 @@ export default function CreatorProductListPage() {
         </div>
       ),
     },
+
     {
       headerTitle: 'Updated Date',
       sortParam: 'updatedDate',
@@ -89,6 +94,16 @@ export default function CreatorProductListPage() {
             {DateHelper.toFormatDate(data.updated_date, 'HH:mm:ss')}
           </div>
         </div>
+      ),
+    },
+    {
+      headerTitle: '',
+      component: (data: IResCreatorProduct) => (
+        <Link to={ROUTES.CREATOR_PRODUCT_DETAIL(data.parent_id)}>
+          <Button variant="outline" size={'icon'}>
+            <InfoIcon />
+          </Button>
+        </Link>
       ),
     },
   ]

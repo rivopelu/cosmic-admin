@@ -2,7 +2,9 @@ import { ENDPOINT } from '@/constants/endpoint'
 import ErrorService from '@/services/error.service'
 import { HttpService } from '@/services/htpp.service'
 import type { IResCreatorProduct } from '@/types/response/IResCreatorProduct'
+import type { IResCreatorProductDetail } from '@/types/response/IResCreatorProductDetail'
 import type {
+  BaseResponse,
   BaseResponsePaginated,
   rootResponsePaginated,
 } from '@/types/response/IResModel'
@@ -31,6 +33,21 @@ export class CreatorProductRepository {
           response_data: [],
           paginated_data: defaultPaginatedResponse,
         }
+      })
+  }
+
+  async getCreatorProductDetail(
+    parentId: string,
+  ): Promise<IResCreatorProductDetail | undefined> {
+    const url = `${ENDPOINT.GET_CREATOR_PRODUCT_DETAIL(parentId)}`
+    return await this.httpService
+      .GET(url)
+      .then((res: BaseResponse<IResCreatorProductDetail>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return undefined
       })
   }
 }

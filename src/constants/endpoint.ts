@@ -9,4 +9,6 @@ export const ENDPOINT = {
   REJECT_CREATOR: (id: string) => `/admin/reject-creator/${id}`,
   APPROVE_CREATOR: (id: string) => `/admin/approve-creator/${id}`,
   GET_CREATOR_PRODUCT_LIST: () => '/creator-product/admin',
+  GET_CREATOR_PRODUCT_DETAIL: (parentId: string) =>
+    `/creator-product/admin/${parentId}`,
 }

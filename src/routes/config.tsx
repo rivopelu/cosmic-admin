@@ -6,6 +6,7 @@ import { ROUTES } from '@/constants/routes'
 import AccountListPage from '@/pages/account/AccountListPage'
 import DetailAccountPage from '@/pages/account/DetailAccountPage'
 import CreatorProductListPage from '@/pages/creator-product/CreatorProductListPage'
+import CreatorProductDetailPage from '@/pages/creator-product/CreatorProductDetailPage'
 
 export interface RouteConfig {
   module: string
@@ -75,6 +76,12 @@ export const routesConfig: RouteConfig[] = [
         sort: (search.sort as string) || undefined,
       }
     },
+  },
+  {
+    module: 'creator-product',
+    path: ROUTES.CREATOR_PRODUCT_DETAIL('$id'),
+    component: CreatorProductDetailPage,
+    type: 'PRIMARY',
   },
   {
     module: 'auth',
