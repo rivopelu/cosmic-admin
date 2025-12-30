@@ -134,7 +134,11 @@ export default function DetailAccountPage() {
               >
                 Reject
               </Button>
-              <Button variant="outline" color="success">
+              <Button
+                variant="outline"
+                color="success"
+                onClick={() => page.setShowModal('APPROVE')}
+              >
                 Approve
               </Button>
             </div>
