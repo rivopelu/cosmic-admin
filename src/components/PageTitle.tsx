@@ -17,8 +17,11 @@ export default function PageTitle(props: IProps) {
   ]
   return (
     <div>
-      <div className="flex items-center gap-2">
+      <div className="flex  gap-2 flex-col items-start">
         <h1 className={'capitalize text-2xl'}>{props.title}</h1>
+        {props.description && (
+          <p className="text-muted-foreground text-sm">{props.description}</p>
+        )}
       </div>
       {props.breadcrumb && (
         <Breadcrumb className={'mt-2'}>
@@ -48,5 +51,6 @@ export default function PageTitle(props: IProps) {
 
 interface IProps {
   title: string
+  description?: string
   breadcrumb?: IBreadcrumbData[]
 }

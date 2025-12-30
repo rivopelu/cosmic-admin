@@ -83,10 +83,10 @@ export default function AccountListPage() {
     <PageContent>
       {/* Page Header */}
       <div className="mb-6">
-        <PageTitle title="Account Management" />
-        <p className="text-sm text-gray-600 mt-1">
-          Manage and monitor all user accounts in the system
-        </p>
+        <PageTitle
+          title="Account Management"
+          description="Manage and monitor all user accounts in the system"
+        />
       </div>
 
       {/* Search and Filter Section */}
