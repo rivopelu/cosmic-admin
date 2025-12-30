@@ -12,6 +12,10 @@ import type { IResAccountList } from '@/types/response/IResAccountList'
 import DateHelper from '@/utils/date-helper'
 import { Form, Formik } from 'formik'
 import { useAccountListPage } from './useAccountListPage'
+import { Button } from '@/components/ui/button'
+import { Info } from 'lucide-react'
+import { Link } from '@tanstack/react-router'
+import { ROUTES } from '@/constants/routes'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -61,6 +65,16 @@ export default function AccountListPage() {
         <Badge variant={data.status === 'VERIFIED' ? 'default' : 'secondary'}>
           {data.status_string}
         </Badge>
+      ),
+    },
+    {
+      headerTitle: '',
+      component: (data: IResAccountList) => (
+        <Link to={ROUTES.ACCOUNT_DETAIL(data.id)}>
+          <Button variant="outline" size={'icon'}>
+            <Info />
+          </Button>
+        </Link>
       ),
     },
   ]

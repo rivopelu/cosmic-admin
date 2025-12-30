@@ -4,6 +4,7 @@ import type { PageLayoutType } from '@/types/types/type'
 import App from '../pages/App'
 import { ROUTES } from '@/constants/routes'
 import AccountListPage from '@/pages/account/AccountListPage'
+import DetailAccountPage from '@/pages/account/DetailAccountPage'
 
 export interface RouteConfig {
   module: string
@@ -35,6 +36,12 @@ export const routesConfig: RouteConfig[] = [
         sort: (search.sort as string) || undefined,
       }
     },
+  },
+  {
+    module: 'account',
+    path: ROUTES.ACCOUNT_DETAIL('$id'),
+    component: DetailAccountPage,
+    type: 'PRIMARY',
   },
   {
     module: 'account',
