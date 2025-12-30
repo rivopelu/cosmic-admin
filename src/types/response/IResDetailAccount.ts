@@ -19,4 +19,7 @@ export interface IResDetailAccount {
   social_media_list: Array<IResSocialMedia>
   approve_date: number
   approve_by: string
+  reject_reason: string
+  reject_date: number
+  reject_by: string
 }

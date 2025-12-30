@@ -46,4 +46,30 @@ export class AccountRepository {
         return undefined
       })
   }
+
+  async rejectAccount(id: string, data: { reason: string }) {
+    const url = `${ENDPOINT.REJECT_CREATOR(id)}`
+    return await this.httpService
+      .PUT(url, data)
+      .then((res: BaseResponse<IResDetailAccount>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return undefined
+      })
+  }
+
+  async approveAccount(id: string) {
+    const url = `${ENDPOINT.APPROVE_CREATOR(id)}`
+    return await this.httpService
+      .PATCH(url)
+      .then((res: BaseResponse<IResDetailAccount>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return undefined
+      })
+  }
 }

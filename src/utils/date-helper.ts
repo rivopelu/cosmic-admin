@@ -2,9 +2,11 @@ import { format, subDays } from 'date-fns'
 
 export default class DateHelper {
   public static toFormatDate(
-    date: Date | number,
+    date: Date | number | undefined,
     formatTime: TypeFormatDate,
   ): string {
+    if (!date) return ''
+
     if (typeof date === 'number') {
       return format(new Date(date), formatTime)
     }

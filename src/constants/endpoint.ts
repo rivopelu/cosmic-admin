@@ -6,4 +6,6 @@ export const ENDPOINT = {
   GET_MASTER_DATA_ACCOUNT_ROLES: () => '/master-data/account-roles',
   GET_MASTER_DATA_ACCOUNT_STATUSES: () => '/master-data/account-statuses',
   DETAIL_ACCOUNT: (id: string) => `/admin/account/${id}`,
+  REJECT_CREATOR: (id: string) => `/admin/reject-creator/${id}`,
+  APPROVE_CREATOR: (id: string) => `/admin/approve-creator/${id}`,
 }
