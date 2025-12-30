@@ -28,7 +28,6 @@ export default function MainLayout({ children, type }: IProps) {
   return (
     <main className="bg-slate-50">
       <Toaster />
-
       {checking()}
     </main>
   )
