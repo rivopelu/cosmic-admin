@@ -1,4 +1,10 @@
-import { Home, User, ChevronRight, ChevronDown } from 'lucide-react'
+import {
+  Home,
+  User,
+  ChevronRight,
+  ChevronDown,
+  ShoppingBag,
+} from 'lucide-react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -46,6 +52,18 @@ const items: Item[] = [
         title: 'Creator',
         url: ROUTES.CREATOR_LIST(),
         icon: User,
+      },
+    ],
+  },
+  {
+    title: 'Product',
+    url: ROUTES.CREATOR_PRODUCT_LIST(),
+    icon: ShoppingBag,
+    children: [
+      {
+        title: 'Creator Product',
+        url: ROUTES.CREATOR_PRODUCT_LIST(),
+        icon: ShoppingBag,
       },
     ],
   },

@@ -5,6 +5,7 @@ import App from '../pages/App'
 import { ROUTES } from '@/constants/routes'
 import AccountListPage from '@/pages/account/AccountListPage'
 import DetailAccountPage from '@/pages/account/DetailAccountPage'
+import CreatorProductListPage from '@/pages/creator-product/CreatorProductListPage'
 
 export interface RouteConfig {
   module: string
@@ -55,6 +56,22 @@ export const routesConfig: RouteConfig[] = [
         size: Number(search.size) || 10,
         role: (search.role as string) || undefined,
         status: (search.status as string) || undefined,
+        sort: (search.sort as string) || undefined,
+      }
+    },
+  },
+  {
+    module: 'creator-product',
+    path: ROUTES.CREATOR_PRODUCT_LIST(),
+    component: CreatorProductListPage,
+    type: 'PRIMARY',
+    validateSearch: (search: Record<string, unknown>) => {
+      return {
+        q: (search.q as string) || undefined,
+        page: Number(search.page) || 0,
+        size: Number(search.size) || 10,
+        status: (search.status as string) || undefined,
+        category_id: (search.category_id as string) || undefined,
         sort: (search.sort as string) || undefined,
       }
     },
