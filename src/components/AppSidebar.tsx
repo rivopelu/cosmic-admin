@@ -4,6 +4,7 @@ import {
   ChevronRight,
   ChevronDown,
   ShoppingBag,
+  Box,
 } from 'lucide-react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { useState } from 'react'
@@ -64,6 +65,18 @@ const items: Item[] = [
         title: 'Creator Product',
         url: ROUTES.CREATOR_PRODUCT_LIST(),
         icon: ShoppingBag,
+      },
+    ],
+  },
+  {
+    title: 'Master Data',
+    url: ROUTES.MASTER_DATA_CREATOR_TYPE(),
+    icon: Box,
+    children: [
+      {
+        title: 'Creator Type',
+        url: ROUTES.MASTER_DATA_CREATOR_TYPE(),
+        icon: Box,
       },
     ],
   },

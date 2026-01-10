@@ -7,6 +7,7 @@ import AccountListPage from '@/pages/account/AccountListPage'
 import DetailAccountPage from '@/pages/account/DetailAccountPage'
 import CreatorProductListPage from '@/pages/creator-product/CreatorProductListPage'
 import CreatorProductDetailPage from '@/pages/creator-product/CreatorProductDetailPage'
+import CreatorTypePage from '@/pages/master-data/CreatorTypePage'
 
 export interface RouteConfig {
   module: string
@@ -38,6 +39,13 @@ export const routesConfig: RouteConfig[] = [
         sort: (search.sort as string) || undefined,
       }
     },
+  },
+
+  {
+    module: 'master-data',
+    path: ROUTES.MASTER_DATA_CREATOR_TYPE(),
+    component: CreatorTypePage,
+    type: 'PRIMARY',
   },
   {
     module: 'account',

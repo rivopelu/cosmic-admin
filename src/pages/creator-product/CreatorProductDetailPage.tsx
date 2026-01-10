@@ -1,9 +1,19 @@
 import type { IBreadcrumbData } from '@/components/Breadcrumbs'
+import InputTextArea from '@/components/InputTextArea'
 import LoadingCard from '@/components/LoadingCard'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
 import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/constants/routes'
 import { formatCurrency } from '@/utils/currency-helper'
@@ -19,15 +29,6 @@ import {
   Tag,
 } from 'lucide-react'
 import { useCreatorProductDetailPage } from './useCreatorProductDetailPage'
-import { Button } from '@/components/ui/button'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
 
 export default function CreatorProductDetailPage() {
   const page = useCreatorProductDetailPage()
@@ -123,9 +124,38 @@ export default function CreatorProductDetailPage() {
     )
   }
 
+  function dialogReject() {
+    return (
+      <Dialog
+        open={page.openDialog === 'REJECT'}
+        onOpenChange={page.onCloseDialog}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Reject Product</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to reject this product?
+            </DialogDescription>
+          </DialogHeader>
+          <InputTextArea name="reason" label="Reason" />
+
+          <DialogFooter>
+            <Button variant="outline" onClick={page.onCloseDialog}>
+              Cancel
+            </Button>
+            <Button color="destructive" onClick={page.onCloseDialog}>
+              Reject
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
   return (
     <PageContent className="grid gap-6">
       {dialogApprove()}
+      {dialogReject()}
       <div className="flex justify-between items-start">
         <PageTitle
           description="View and manage creator product details"

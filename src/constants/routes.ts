@@ -5,4 +5,5 @@ export const ROUTES = {
   ACCOUNT_DETAIL: (id: string) => `/account/${id}` as const,
   CREATOR_PRODUCT_LIST: () => '/creator-product' as const,
   CREATOR_PRODUCT_DETAIL: (id: string) => `/creator-product/${id}` as const,
+  MASTER_DATA_CREATOR_TYPE: () => `/master-data/creator-type`,
 }
