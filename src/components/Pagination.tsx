@@ -14,35 +14,28 @@ export default function Pagination({
   onPageChange,
   maxVisiblePages = 5,
 }: PaginationProps) {
-  // Don't render pagination if there's only one page
   if (totalPages <= 1) return null
 
-  // Calculate which page numbers to show
   const getPageNumbers = () => {
     const pageNumbers = []
 
-    // Always show first page
     pageNumbers.push(0)
 
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2))
     const endPage = Math.min(totalPages - 2, startPage + maxVisiblePages - 3)
 
-    // Adjust if we're near the end
     if (endPage - startPage < maxVisiblePages - 3) {
       startPage = Math.max(1, endPage - (maxVisiblePages - 3))
     }
 
-    // Add ellipsis after first page if needed
     if (startPage > 1) {
-      pageNumbers.push(-1) // -1 represents ellipsis
+      pageNumbers.push(-1)
     }
 
-    // Add middle pages
     for (let i = startPage; i <= endPage; i++) {
       pageNumbers.push(i)
     }
 
-    // Add ellipsis before last page if needed
     if (endPage < totalPages - 2) {
       pageNumbers.push(-2) // -2 represents ellipsis
     }

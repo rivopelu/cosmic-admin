@@ -6,19 +6,20 @@ import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/constants/routes'
-import DateHelper from '@/utils/date-helper'
 import { formatCurrency } from '@/utils/currency-helper'
-import { useCreatorProductDetailPage } from './useCreatorProductDetailPage'
+import DateHelper from '@/utils/date-helper'
 import {
-  Package,
-  DollarSign,
   Calendar,
-  Tag,
-  Image as ImageIcon,
+  DollarSign,
   FileText,
-  Percent,
   Hash,
+  Image as ImageIcon,
+  Package,
+  Percent,
+  Tag,
 } from 'lucide-react'
+import { useCreatorProductDetailPage } from './useCreatorProductDetailPage'
+import { Button } from '@/components/ui/button'
 
 export default function CreatorProductDetailPage() {
   const page = useCreatorProductDetailPage()
@@ -96,6 +97,10 @@ export default function CreatorProductDetailPage() {
           title="Product Details"
           breadcrumb={breadcrumbs}
         />
+        <div className="flex gap-1">
+          <Button color="destructive">REJECT</Button>
+          <Button color="success">APPROVE</Button>
+        </div>
       </div>
 
       {/* Product Header Card */}
@@ -234,7 +239,6 @@ export default function CreatorProductDetailPage() {
           </CardContent>
         </Card>
 
-        {/* Tags */}
         {data?.tags && data.tags.length > 0 && (
           <Card>
             <CardHeader>
