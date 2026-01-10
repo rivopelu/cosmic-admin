@@ -50,4 +50,20 @@ export class CreatorProductRepository {
         return undefined
       })
   }
+
+  async rejectCreatorProduct(
+    parentId: string,
+    data: { reason_id: string | null; custom_reason: string },
+  ): Promise<any> {
+    const url = `${ENDPOINT.REJECT_CREATOR_PRODUCT(parentId)}`
+    return await this.httpService
+      .PUT(url, data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
 }

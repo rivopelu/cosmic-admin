@@ -11,6 +11,8 @@ export const ENDPOINT = {
   GET_CREATOR_PRODUCT_LIST: () => '/creator-product/admin',
   GET_CREATOR_PRODUCT_DETAIL: (parentId: string) =>
     `/creator-product/admin/${parentId}`,
+  REJECT_CREATOR_PRODUCT: (parentId: string) =>
+    `/creator-product/admin/reject/${parentId}`,
   GET_MASTER_DATA_CREATOR_TYPES: () => '/master-data/creator-types',
   CREATE_CREATOR_TYPE: () => '/master-data/creator-types',
   UPDATE_CREATOR_TYPE: (id: string) => `/master-data/creator-types/${id}`,

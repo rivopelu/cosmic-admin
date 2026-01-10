@@ -1,4 +1,5 @@
 import type { IBreadcrumbData } from '@/components/Breadcrumbs'
+import InputSelect from '@/components/InputSelect'
 import InputTextArea from '@/components/InputTextArea'
 import LoadingCard from '@/components/LoadingCard'
 import PageContent from '@/components/PageContent'
@@ -18,6 +19,7 @@ import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/constants/routes'
 import { formatCurrency } from '@/utils/currency-helper'
 import DateHelper from '@/utils/date-helper'
+import { Form, Formik } from 'formik'
 import {
   Calendar,
   DollarSign,
@@ -28,7 +30,11 @@ import {
   Percent,
   Tag,
 } from 'lucide-react'
-import { useCreatorProductDetailPage } from './useCreatorProductDetailPage'
+import * as Yup from 'yup'
+import {
+  useCreatorProductDetailPage,
+  type IRejectProductForm,
+} from './useCreatorProductDetailPage'
 
 export default function CreatorProductDetailPage() {
   const page = useCreatorProductDetailPage()
@@ -124,7 +130,34 @@ export default function CreatorProductDetailPage() {
     )
   }
 
+  const rejectValidationSchema = Yup.object().shape({
+    reason_id: Yup.string().nullable(),
+    custom_reason: Yup.string().when('reason_id', {
+      is: (val: string | null) => !val || val === 'custom',
+      then: (schema) => schema.required('Custom reason is required'),
+      otherwise: (schema) => schema,
+    }),
+  })
+
+  const rejectInitialValues: IRejectProductForm = {
+    reason_id: null,
+    custom_reason: '',
+  }
+
+  const handleRejectSubmit = async (values: IRejectProductForm) => {
+    const submitData = {
+      reason_id: values.reason_id === 'custom' ? null : values.reason_id,
+      custom_reason: values.custom_reason,
+    }
+    await page.mutationReject.mutateAsync(submitData)
+  }
+
   function dialogReject() {
+    const reasonOptions = [
+      ...page.reviewReasonOptions,
+      { label: 'Custom Reason', value: 'custom' },
+    ]
+
     return (
       <Dialog
         open={page.openDialog === 'REJECT'}
@@ -134,19 +167,53 @@ export default function CreatorProductDetailPage() {
           <DialogHeader>
             <DialogTitle>Reject Product</DialogTitle>
             <DialogDescription>
-              Are you sure you want to reject this product?
+              Please select a reason for rejecting this product.
             </DialogDescription>
           </DialogHeader>
-          <InputTextArea name="reason" label="Reason" />
+          <Formik
+            initialValues={rejectInitialValues}
+            validationSchema={rejectValidationSchema}
+            onSubmit={handleRejectSubmit}
+            enableReinitialize
+          >
+            {({ values, isSubmitting }) => (
+              <Form className="space-y-4">
+                <InputSelect
+                  name="reason_id"
+                  label="Rejection Reason"
+                  placeholder="Select a reason"
+                  options={reasonOptions}
+                />
 
-          <DialogFooter>
-            <Button variant="outline" onClick={page.onCloseDialog}>
-              Cancel
-            </Button>
-            <Button color="destructive" onClick={page.onCloseDialog}>
-              Reject
-            </Button>
-          </DialogFooter>
+                {(!values.reason_id || values.reason_id === 'custom') && (
+                  <InputTextArea
+                    name="custom_reason"
+                    label="Custom Reason"
+                    placeholder="Enter custom rejection reason"
+                  />
+                )}
+
+                <DialogFooter>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={page.onCloseDialog}
+                    disabled={isSubmitting || page.mutationReject.isPending}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="submit"
+                    color="destructive"
+                    loading={isSubmitting || page.mutationReject.isPending}
+                    disabled={isSubmitting || page.mutationReject.isPending}
+                  >
+                    Reject
+                  </Button>
+                </DialogFooter>
+              </Form>
+            )}
+          </Formik>
         </DialogContent>
       </Dialog>
     )
@@ -162,17 +229,22 @@ export default function CreatorProductDetailPage() {
           title="Product Details"
           breadcrumb={breadcrumbs}
         />
-        <div className="flex gap-1">
-          <Button
-            color="destructive"
-            onClick={() => page.setOpenDialog('REJECT')}
-          >
-            REJECT
-          </Button>
-          <Button color="success" onClick={() => page.setOpenDialog('APPROVE')}>
-            APPROVE
-          </Button>
-        </div>
+        {data?.status === 'PENDING' && (
+          <div className="flex gap-1">
+            <Button
+              color="destructive"
+              onClick={() => page.setOpenDialog('REJECT')}
+            >
+              REJECT
+            </Button>
+            <Button
+              color="success"
+              onClick={() => page.setOpenDialog('APPROVE')}
+            >
+              APPROVE
+            </Button>
+          </div>
+        )}
       </div>
 
       {/* Product Header Card */}
