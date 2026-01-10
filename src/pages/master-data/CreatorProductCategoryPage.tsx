@@ -1,7 +1,6 @@
 import type { ITableColumn } from '@/components/AppTable'
 import AppTable from '@/components/AppTable'
 import InputText from '@/components/InputText'
-import InputTextArea from '@/components/InputTextArea'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
 import { Badge } from '@/components/ui/badge'
@@ -14,19 +13,19 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import type { IResCreatorType } from '@/types/response/IResCreatorType'
 import { Form, Formik } from 'formik'
 import { Edit2, Plus, Trash2 } from 'lucide-react'
 import * as Yup from 'yup'
-import { useCreatorTypePage } from './useCreatorTypePage'
+import { useCreatorProductCategoryPage } from './useCreatorProductCategoryPage'
+import type { IResCreatorProductCategory } from '@/types/response/IResCreatorProductCategory'
 
-export default function CreatorTypePage() {
-  const page = useCreatorTypePage()
+export default function CreatorProductCategoryPage() {
+  const page = useCreatorProductCategoryPage()
 
-  const tableColumn: Array<ITableColumn<IResCreatorType>> = [
+  const tableColumn: Array<ITableColumn<IResCreatorProductCategory>> = [
     {
       headerTitle: 'Name',
-      component: (data: IResCreatorType) => (
+      component: (data: IResCreatorProductCategory) => (
         <div>
           <div className="font-semibold text-gray-900">{data.name}</div>
           <div className="text-xs text-gray-500">{data.slug}</div>
@@ -34,14 +33,8 @@ export default function CreatorTypePage() {
       ),
     },
     {
-      headerTitle: 'Description',
-      component: (data: IResCreatorType) => (
-        <div className="text-gray-700">{data.description}</div>
-      ),
-    },
-    {
       headerTitle: 'ID',
-      component: (data: IResCreatorType) => (
+      component: (data: IResCreatorProductCategory) => (
         <Badge variant="outline" className="font-mono text-xs">
           {data.id}
         </Badge>
@@ -49,7 +42,7 @@ export default function CreatorTypePage() {
     },
     {
       headerTitle: '',
-      component: (data: IResCreatorType) => (
+      component: (data: IResCreatorProductCategory) => (
         <div className="flex justify-end gap-2">
           <Button
             variant="outline"
@@ -72,7 +65,6 @@ export default function CreatorTypePage() {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required('Name is required'),
-    description: Yup.string().required('Description is required'),
   })
 
   return (
@@ -80,12 +72,12 @@ export default function CreatorTypePage() {
       {/* Page Header */}
       <div className="mb-6 flex justify-between items-center">
         <PageTitle
-          title="Creator Type Management"
-          description="Manage and monitor all creator types in the system"
+          title="Product Category Management"
+          description="Manage and monitor all creator product categories"
         />
         <Button onClick={page.handleCreate}>
           <Plus className="mr-2 size-4" />
-          Create Creator Type
+          Create Category
         </Button>
       </div>
 
@@ -106,12 +98,12 @@ export default function CreatorTypePage() {
         <DialogContent>
           <DialogHeader>
             <DialogTitle>
-              {page.selectedItem ? 'Edit Creator Type' : 'Create Creator Type'}
+              {page.selectedItem ? 'Edit Category' : 'Create Category'}
             </DialogTitle>
             <DialogDescription>
               {page.selectedItem
-                ? 'Edit the details of the creator type below.'
-                : 'Fill in the details to create a new creator type.'}
+                ? 'Edit the details of the category below.'
+                : 'Fill in the details to create a new category.'}
             </DialogDescription>
           </DialogHeader>
           <Formik
@@ -122,11 +114,6 @@ export default function CreatorTypePage() {
             {({ isSubmitting }) => (
               <Form className="space-y-4">
                 <InputText label="Name" name="name" placeholder="Enter name" />
-                <InputTextArea
-                  label="Description"
-                  name="description"
-                  placeholder="Enter description"
-                />
                 <DialogFooter>
                   <Button
                     type="button"
@@ -142,11 +129,6 @@ export default function CreatorTypePage() {
                   </Button>
                   <Button
                     type="submit"
-                    loading={
-                      isSubmitting ||
-                      page.mutationCreate.isPending ||
-                      page.mutationUpdate.isPending
-                    }
                     disabled={
                       isSubmitting ||
                       page.mutationCreate.isPending ||
@@ -166,10 +148,10 @@ export default function CreatorTypePage() {
       <Dialog open={page.isOpenDelete} onOpenChange={page.handleCloseDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete Creator Type</DialogTitle>
+            <DialogTitle>Delete Category</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete this creator type? This action
-              cannot be undone.
+              Are you sure you want to delete this category? This action cannot
+              be undone.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
@@ -179,7 +161,6 @@ export default function CreatorTypePage() {
             <Button
               onClick={() => page.mutationDelete.mutate()}
               disabled={page.mutationDelete.isPending}
-              loading={page.mutationDelete.isPending}
             >
               Delete
             </Button>

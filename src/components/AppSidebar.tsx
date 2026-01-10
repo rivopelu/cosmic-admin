@@ -78,6 +78,11 @@ const items: Item[] = [
         url: ROUTES.MASTER_DATA_CREATOR_TYPE(),
         icon: Box,
       },
+      {
+        title: 'Creator Product Category',
+        url: ROUTES.MASTER_DATA_CREATOR_PRODUCT_CATEGORY(),
+        icon: Box,
+      },
     ],
   },
 ]
