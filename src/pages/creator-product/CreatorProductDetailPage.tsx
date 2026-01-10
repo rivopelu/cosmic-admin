@@ -20,6 +20,14 @@ import {
 } from 'lucide-react'
 import { useCreatorProductDetailPage } from './useCreatorProductDetailPage'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 
 export default function CreatorProductDetailPage() {
   const page = useCreatorProductDetailPage()
@@ -89,8 +97,35 @@ export default function CreatorProductDetailPage() {
       </PageContent>
     )
 
+  function dialogApprove() {
+    return (
+      <Dialog
+        open={page.openDialog === 'APPROVE'}
+        onOpenChange={page.onCloseDialog}
+      >
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Approve Product</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to approve this product?
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={page.onCloseDialog}>
+              Cancel
+            </Button>
+            <Button color="success" onClick={page.onCloseDialog}>
+              Approve
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    )
+  }
+
   return (
     <PageContent className="grid gap-6">
+      {dialogApprove()}
       <div className="flex justify-between items-start">
         <PageTitle
           description="View and manage creator product details"
@@ -98,8 +133,15 @@ export default function CreatorProductDetailPage() {
           breadcrumb={breadcrumbs}
         />
         <div className="flex gap-1">
-          <Button color="destructive">REJECT</Button>
-          <Button color="success">APPROVE</Button>
+          <Button
+            color="destructive"
+            onClick={() => page.setOpenDialog('REJECT')}
+          >
+            REJECT
+          </Button>
+          <Button color="success" onClick={() => page.setOpenDialog('APPROVE')}>
+            APPROVE
+          </Button>
         </div>
       </div>
 
