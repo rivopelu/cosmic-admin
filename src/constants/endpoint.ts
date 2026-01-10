@@ -23,4 +23,10 @@ export const ENDPOINT = {
     `/master-data/creator-product-categories/${id}`,
   DELETE_CREATOR_PRODUCT_CATEGORY: (id: string) =>
     `/master-data/creator-product-categories/${id}`,
+  GET_PRODUCT_REVIEW_REASONS: () => '/master-data/product-review-reasons',
+  CREATE_PRODUCT_REVIEW_REASON: () => '/master-data/product-review-reasons',
+  UPDATE_PRODUCT_REVIEW_REASON: (id: string) =>
+    `/master-data/product-review-reasons/${id}`,
+  DELETE_PRODUCT_REVIEW_REASON: (id: string) =>
+    `/master-data/product-review-reasons/${id}`,
 }

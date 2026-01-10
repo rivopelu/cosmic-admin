@@ -83,6 +83,11 @@ const items: Item[] = [
         url: ROUTES.MASTER_DATA_CREATOR_PRODUCT_CATEGORY(),
         icon: Box,
       },
+      {
+        title: 'Product Review Reason',
+        url: ROUTES.MASTER_DATA_PRODUCT_REVIEW_REASON(),
+        icon: Box,
+      },
     ],
   },
 ]

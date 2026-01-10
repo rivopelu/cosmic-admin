@@ -4,6 +4,7 @@ import { HttpService } from '@/services/htpp.service'
 import type { IResLabelValue } from '@/types/response/IResLabelValue'
 import type { BaseResponse } from '@/types/response/IResModel'
 import type { IResCreatorType } from '@/types/response/IResCreatorType'
+import type { IResProductReviewReason } from '@/types/response/IResProductReviewReason'
 
 export default class MasterDataRepository {
   httpService = new HttpService()
@@ -120,6 +121,57 @@ export default class MasterDataRepository {
   deleteCreatorProductCategory(id: string) {
     return this.httpService
       .DELETE(ENDPOINT.DELETE_CREATOR_PRODUCT_CATEGORY(id))
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  getProductReviewReasons() {
+    return this.httpService
+      .GET(ENDPOINT.GET_PRODUCT_REVIEW_REASONS())
+      .then((res: BaseResponse<IResProductReviewReason[]>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return []
+      })
+  }
+
+  createProductReviewReason(data: { title: string; description: string }) {
+    return this.httpService
+      .POST(ENDPOINT.CREATE_PRODUCT_REVIEW_REASON(), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  updateProductReviewReason(
+    id: string,
+    data: { title: string; description: string },
+  ) {
+    return this.httpService
+      .PUT(ENDPOINT.UPDATE_PRODUCT_REVIEW_REASON(id), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  deleteProductReviewReason(id: string) {
+    return this.httpService
+      .DELETE(ENDPOINT.DELETE_PRODUCT_REVIEW_REASON(id))
       .then((res: BaseResponse<any>) => {
         return res.data
       })
