@@ -87,7 +87,7 @@ export default function Pagination({
         return (
           <Button
             key={pageNumber}
-            variant={currentPage === pageNumber ? 'default' : 'outline'}
+            variant={currentPage === pageNumber ? 'solid' : 'outline'}
             size="icon"
             onClick={() => onPageChange(pageNumber)}
           >

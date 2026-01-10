@@ -25,7 +25,7 @@ export default function InputSearch(props: IProps) {
         <Button
           size={'icon'}
           type="button"
-          variant={'destructive'}
+          color={'destructive'}
           onClick={props.handleReset}
         >
           <Trash />
