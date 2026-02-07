@@ -66,4 +66,17 @@ export class CreatorProductRepository {
         throw e
       })
   }
+
+  async approveCreatorProduct(parentId: string): Promise<any> {
+    const url = `${ENDPOINT.APPROVE_CREATOR_PRODUCT(parentId)}`
+    return await this.httpService
+      .PUT(url, { status: 'approved' })
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
 }

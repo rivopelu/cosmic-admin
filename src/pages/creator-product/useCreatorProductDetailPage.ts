@@ -45,6 +45,18 @@ export function useCreatorProductDetailPage() {
     },
   })
 
+  const mutationApprove = useMutation({
+    mutationFn: async () => {
+      if (!id) throw new Error('Product ID not found')
+      return await creatorProductRepository.approveCreatorProduct(id)
+    },
+    onSuccess: () => {
+      toast.success('Product approved successfully')
+      queryDetailProduct.refetch()
+      onCloseDialog()
+    },
+  })
+
   function onCloseDialog() {
     setOpenDialog(undefined)
   }
@@ -63,5 +75,6 @@ export function useCreatorProductDetailPage() {
     setOpenDialog,
     onCloseDialog,
     mutationReject,
+    mutationApprove,
   }
 }

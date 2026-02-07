@@ -13,6 +13,8 @@ export const ENDPOINT = {
     `/creator-product/admin/${parentId}`,
   REJECT_CREATOR_PRODUCT: (parentId: string) =>
     `/creator-product/admin/reject/${parentId}`,
+  APPROVE_CREATOR_PRODUCT: (parentId: string) =>
+    `/creator-product/admin/approve/${parentId}`,
   GET_MASTER_DATA_CREATOR_TYPES: () => '/master-data/creator-types',
   CREATE_CREATOR_TYPE: () => '/master-data/creator-types',
   UPDATE_CREATOR_TYPE: (id: string) => `/master-data/creator-types/${id}`,

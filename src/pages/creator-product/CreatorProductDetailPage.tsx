@@ -127,7 +127,12 @@ export default function CreatorProductDetailPage() {
             <Button variant="outline" onClick={page.onCloseDialog}>
               Cancel
             </Button>
-            <Button color="success" onClick={page.onCloseDialog}>
+            <Button
+              color="success"
+              onClick={() => page.mutationApprove.mutate()}
+              loading={page.mutationApprove.isPending}
+              disabled={page.mutationApprove.isPending}
+            >
               Approve
             </Button>
           </DialogFooter>
