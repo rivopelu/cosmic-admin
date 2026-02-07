@@ -1,9 +1,8 @@
 'use client'
 
-import * as React from 'react'
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react'
+import * as React from 'react'
 
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import {
   Command,
@@ -18,14 +17,15 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover'
+import { cn } from '@/lib/utils'
+import type { IResLabelValue } from '@/types/response/IResLabelValue'
 import {
-  type FormikErrors,
-  type FormikTouched,
   getIn,
   useFormikContext,
+  type FormikErrors,
+  type FormikTouched,
 } from 'formik'
 import Label from './Label'
-import type { IResLabelValue } from '@/types/response/IResLabelValue'
 
 interface IProps {
   id?: string
@@ -109,7 +109,7 @@ export default function InputSelect(props: IProps) {
             </Button>
           </PopoverTrigger>
           <PopoverContent
-            className="w-[var(--radix-popover-trigger-width)] p-0"
+            className="w-(--radix-popover-trigger-width) p-0"
             align="start"
           >
             <Command>
