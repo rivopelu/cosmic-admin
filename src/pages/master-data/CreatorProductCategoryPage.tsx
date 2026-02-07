@@ -27,8 +27,8 @@ export default function CreatorProductCategoryPage() {
       headerTitle: 'Name',
       component: (data: IResCreatorProductCategory) => (
         <div>
-          <div className="font-semibold text-gray-900">{data.name}</div>
-          <div className="text-xs text-gray-500">{data.slug}</div>
+          <div className="font-semibold text-foreground">{data.name}</div>
+          <div className="text-xs text-muted-foreground">{data.slug}</div>
         </div>
       ),
     },
@@ -56,7 +56,7 @@ export default function CreatorProductCategoryPage() {
             size="icon"
             onClick={() => page.handleDelete(data)}
           >
-            <Trash2 className="size-4 text-red-500" />
+            <Trash2 className="size-4 text-destructive" />
           </Button>
         </div>
       ),

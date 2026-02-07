@@ -27,8 +27,10 @@ export default function AccountListPage() {
         <div className="flex items-center gap-3">
           <AppAvatar src={data.profile_picture} alt={data.name} />
           <div>
-            <div className="font-semibold text-gray-900">{data.name}</div>
-            <div className="text-xs text-gray-500">@{data.username}</div>
+            <div className="font-semibold text-foreground">{data.name}</div>
+            <div className="text-xs text-muted-foreground">
+              @{data.username}
+            </div>
           </div>
         </div>
       ),
@@ -36,7 +38,7 @@ export default function AccountListPage() {
     {
       headerTitle: 'Email',
       component: (data: IResAccountList) => (
-        <div className="text-gray-700">{data.email}</div>
+        <div className="text-muted-foreground">{data.email}</div>
       ),
     },
     {
@@ -51,9 +53,9 @@ export default function AccountListPage() {
       headerTitle: 'Created Date',
       sortParam: 'created_date',
       component: (data: IResAccountList) => (
-        <div className="text-gray-600">
+        <div className="text-muted-foreground">
           {DateHelper.toFormatDate(data.created_date, 'MMM dd, yyyy')}
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             {DateHelper.toFormatDate(data.created_date, 'HH:mm:ss')}
           </div>
         </div>

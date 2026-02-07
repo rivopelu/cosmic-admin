@@ -1,6 +1,10 @@
 import { AuthService } from '@/services/auth.service'
-import { Bell, LogOut, Settings, User, ChevronDown } from 'lucide-react'
+import { authStore } from '@/store/auth.store'
+import { useStore } from '@tanstack/react-store'
+import { Bell, LogOut, Settings, User } from 'lucide-react'
 import PageContainer from './PageContainer'
+import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
+import { Button } from './ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -9,10 +13,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
-import { Button } from './ui/button'
-import { useStore } from '@tanstack/react-store'
-import { authStore } from '@/store/auth.store'
 
 export default function TopBar() {
   const { account } = useStore(authStore)
@@ -27,61 +27,43 @@ export default function TopBar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 flex bg-white h-16 shrink-0 items-center w-full gap-2 border-b border-gray-200 shadow-sm">
-      <PageContainer className="flex justify-between items-center w-full">
+    <header className="sticky top-4 z-50 flex bg-card/95 backdrop-blur-sm h-16 shrink-0 items-center justify-between m-4 rounded-xl border border-border shadow-sm transition-colors duration-300">
+      <PageContainer className="flex items-center  justify-between px-4">
         {/* Left Section - Logo/Title */}
         <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <div>
-              <h1 className="text-lg font-semibold text-gray-900">
-                Welcome To Cosmic Admin
-              </h1>
-            </div>
-          </div>
+          <h1 className="text-xl font-bold  text-white">COSMIC</h1>
         </div>
 
         {/* Right Section - Actions & Profile */}
         <div className="flex items-center gap-3">
           {/* Notifications */}
           <Button variant="ghost" size="icon" className="relative">
-            <Bell className="h-5 w-5 text-gray-600" />
+            <Bell className="h-5 w-5 text-muted-foreground" />
             <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
           </Button>
 
           {/* User Profile Dropdown */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button
-                variant="ghost"
-                className="flex items-center gap-2 hover:bg-gray-100 px-3"
-              >
+              <Button variant="ghost" className="relative h-8 w-8 rounded-full">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
                     src={account?.profile_picture}
                     alt={account?.name}
                   />
-                  <AvatarFallback className="bg-primary text-white text-xs">
+                  <AvatarFallback className="bg-primary text-primary-foreground text-xs">
                     {getInitials(account?.name || 'User')}
                   </AvatarFallback>
                 </Avatar>
-                <div className="hidden md:flex flex-col items-start">
-                  <span className="text-sm font-medium text-gray-900">
-                    {account?.name || 'User'}
-                  </span>
-                  <span className="text-xs text-gray-500">
-                    {account?.email || ''}
-                  </span>
-                </div>
-                <ChevronDown className="h-4 w-4 text-gray-500" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56">
-              <DropdownMenuLabel>
+            <DropdownMenuContent align="end" className="w-56" forceMount>
+              <DropdownMenuLabel className="font-normal">
                 <div className="flex flex-col space-y-1">
-                  <p className="text-sm font-medium">
+                  <p className="text-sm font-medium leading-none text-foreground">
                     {account?.name || 'User'}
                   </p>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs leading-none text-muted-foreground">
                     {account?.email || ''}
                   </p>
                 </div>
@@ -97,7 +79,7 @@ export default function TopBar() {
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem
-                className="text-red-600 focus:text-red-600 focus:bg-red-50"
+                className="text-destructive focus:text-destructive focus:bg-destructive/10"
                 onClick={() => AuthService.logout()}
               >
                 <LogOut className="mr-2 h-4 w-4" />

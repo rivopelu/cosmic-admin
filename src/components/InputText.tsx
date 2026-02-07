@@ -58,9 +58,9 @@ export default function InputText(props: IProps) {
         />
       )}
       <div>
-        <div className={cn('relative flex items-center dark:bg-card bg-white')}>
+        <div className={cn('relative flex items-center bg-background')}>
           {props.startIcon && (
-            <span className="absolute text-gray-500 left-3 flex items-center pr-3">
+            <span className="absolute text-muted-foreground left-3 flex items-center pr-3">
               {props.startIcon}
             </span>
           )}
@@ -79,14 +79,15 @@ export default function InputText(props: IProps) {
             type={props.type || 'text'}
             placeholder={props.placeholder || ''}
             className={cn(
+              'bg-card',
               props.startIcon ? 'pl-12' : '',
               props.endIcon ? 'pr-9' : '',
-              errorMessage ? ' outline-red-500 border-red-500 bg-red-100' : '',
+              errorMessage ? ' outline-red-500 border-red-500 ' : '',
             )}
             id={props.id}
           />
           {props.endIcon && (
-            <span className="absolute text-gray-500 right-3 flex items-center pl-3">
+            <span className="absolute text-muted-foreground right-3 flex items-center pl-3">
               {props.endIcon}
             </span>
           )}
@@ -95,7 +96,7 @@ export default function InputText(props: IProps) {
           <p
             className={cn(
               'text-xs mt-1',
-              errorMessage ? 'text-red-500' : 'text-gray-500',
+              errorMessage ? 'text-red-500' : 'text-muted-foreground',
             )}
           >
             {errorMessage || props.helperText}

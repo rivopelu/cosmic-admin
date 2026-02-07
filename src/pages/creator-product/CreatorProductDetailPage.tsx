@@ -53,27 +53,33 @@ export default function CreatorProductDetailPage() {
   const getStatusBadge = () => {
     const statusMap = {
       PUBLISHED: {
-        color: 'bg-green-100 text-green-700 border-green-300',
+        color:
+          'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-900',
         label: 'Published',
       },
       DRAFT: {
-        color: 'bg-gray-100 text-gray-700 border-gray-300',
+        color:
+          'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700',
         label: 'Draft',
       },
       PENDING: {
-        color: 'bg-yellow-100 text-yellow-700 border-yellow-300',
+        color:
+          'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-900',
         label: 'Pending',
       },
       REJECTED: {
-        color: 'bg-red-100 text-red-700 border-red-300',
+        color:
+          'bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-900',
         label: 'Rejected',
       },
       DELETED: {
-        color: 'bg-slate-100 text-slate-700 border-slate-300',
+        color:
+          'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
         label: 'Deleted',
       },
       ARCHIVED: {
-        color: 'bg-blue-100 text-blue-700 border-blue-300',
+        color:
+          'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-900',
         label: 'Archived',
       },
     }

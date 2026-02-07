@@ -28,15 +28,15 @@ export default function CreatorTypePage() {
       headerTitle: 'Name',
       component: (data: IResCreatorType) => (
         <div>
-          <div className="font-semibold text-gray-900">{data.name}</div>
-          <div className="text-xs text-gray-500">{data.slug}</div>
+          <div className="font-semibold text-foreground">{data.name}</div>
+          <div className="text-xs text-muted-foreground">{data.slug}</div>
         </div>
       ),
     },
     {
       headerTitle: 'Description',
       component: (data: IResCreatorType) => (
-        <div className="text-gray-700">{data.description}</div>
+        <div className="text-muted-foreground">{data.description}</div>
       ),
     },
     {
@@ -63,7 +63,7 @@ export default function CreatorTypePage() {
             size="icon"
             onClick={() => page.handleDelete(data)}
           >
-            <Trash2 className="size-4 text-red-500" />
+            <Trash2 className="size-4 text-destructive" />
           </Button>
         </div>
       ),

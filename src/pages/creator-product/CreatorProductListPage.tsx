@@ -44,8 +44,10 @@ export default function CreatorProductListPage() {
             className="w-12 h-12 rounded-lg object-cover"
           />
           <div>
-            <div className="font-semibold text-gray-900">{data.name}</div>
-            <div className="text-xs text-gray-500">{data.creator_name}</div>
+            <div className="font-semibold text-foreground">{data.name}</div>
+            <div className="text-xs text-muted-foreground">
+              {data.creator_name}
+            </div>
           </div>
         </div>
       ),
@@ -53,14 +55,14 @@ export default function CreatorProductListPage() {
     {
       headerTitle: 'Category',
       component: (data: IResCreatorProduct) => (
-        <div className="text-gray-700">{data.category_name}</div>
+        <div className="text-muted-foreground">{data.category_name}</div>
       ),
     },
     {
       headerTitle: 'Price',
       sortParam: 'price',
       component: (data: IResCreatorProduct) => (
-        <div className="font-semibold text-gray-900">
+        <div className="font-semibold text-foreground">
           {formatCurrency(data.price)}
         </div>
       ),
@@ -75,9 +77,9 @@ export default function CreatorProductListPage() {
       headerTitle: 'Created Date',
       sortParam: 'createdDate',
       component: (data: IResCreatorProduct) => (
-        <div className="text-gray-600">
+        <div className="text-muted-foreground">
           {DateHelper.toFormatDate(data.created_date, 'MMM dd, yyyy')}
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             {DateHelper.toFormatDate(data.created_date, 'HH:mm:ss')}
           </div>
         </div>
@@ -88,9 +90,9 @@ export default function CreatorProductListPage() {
       headerTitle: 'Updated Date',
       sortParam: 'updatedDate',
       component: (data: IResCreatorProduct) => (
-        <div className="text-gray-600">
+        <div className="text-muted-foreground">
           {DateHelper.toFormatDate(data.updated_date, 'MMM dd, yyyy')}
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-muted-foreground">
             {DateHelper.toFormatDate(data.updated_date, 'HH:mm:ss')}
           </div>
         </div>
@@ -141,7 +143,7 @@ export default function CreatorProductListPage() {
           }}
         >
           {/* TODO: Add filter form with status and category filters */}
-          <div className="p-4 text-sm text-gray-500">
+          <div className="p-4 text-sm text-muted-foreground">
             Filters will be added here (Status, Category)
           </div>
         </FilterList>

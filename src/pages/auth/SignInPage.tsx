@@ -8,7 +8,7 @@ import { Lock, Mail, Sparkles } from 'lucide-react'
 export default function SignInPage() {
   const page = useSignInPage()
   return (
-    <main className="min-h-screen bg-linear-to-br from-primary/10 via-purple-50 to-pink-50 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-background flex items-center justify-center p-4">
       <div className="w-full max-w-6xl grid lg:grid-cols-2 gap-8 items-center">
         {/* Left Section - Branding */}
         <div className="hidden lg:flex flex-col justify-center space-y-6 p-8">
@@ -21,7 +21,7 @@ export default function SignInPage() {
                 Cosmic Admin
               </h1>
             </div>
-            <p className="text-xl text-gray-600">
+            <p className="text-xl text-muted-foreground">
               Welcome to your management portal
             </p>
           </div>
@@ -44,10 +44,10 @@ export default function SignInPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">
+                <h3 className="font-semibold text-foreground">
                   Secure Authentication
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   Your data is protected with enterprise-grade security
                 </p>
               </div>
@@ -70,8 +70,10 @@ export default function SignInPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">Lightning Fast</h3>
-                <p className="text-sm text-gray-600">
+                <h3 className="font-semibold text-foreground">
+                  Lightning Fast
+                </h3>
+                <p className="text-sm text-muted-foreground">
                   Optimized performance for seamless experience
                 </p>
               </div>
@@ -94,10 +96,10 @@ export default function SignInPage() {
                 </svg>
               </div>
               <div>
-                <h3 className="font-semibold text-gray-900">
+                <h3 className="font-semibold text-foreground">
                   Powerful Management
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-muted-foreground">
                   Complete control over your admin operations
                 </p>
               </div>
@@ -107,7 +109,7 @@ export default function SignInPage() {
 
         {/* Right Section - Sign In Form */}
         <div className="flex items-center justify-center">
-          <Card className="w-full max-w-md shadow-2xl border-0">
+          <Card className="w-full max-w-md shadow-2xl ">
             <CardHeader className="space-y-1 pb-6">
               <div className="flex lg:hidden items-center gap-2 mb-4">
                 <div className="w-10 h-10 rounded-lg bg-linear-to-br from-primary to-purple-600 flex items-center justify-center">
@@ -117,10 +119,10 @@ export default function SignInPage() {
                   Cosmic Admin
                 </h2>
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold text-foreground">
                 Sign in to your account
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="text-sm text-muted-foreground">
                 Enter your credentials to access the admin portal
               </p>
             </CardHeader>
@@ -128,7 +130,7 @@ export default function SignInPage() {
               <CardContent className="space-y-4">
                 <div className="space-y-4">
                   <div className="relative">
-                    <Mail className="absolute left-3 top-9 h-5 w-5 text-gray-400" />
+                    <Mail className="absolute left-3 top-9 h-5 w-5 text-muted-foreground" />
                     <InputText
                       label="Email Address"
                       name="email"
@@ -138,7 +140,7 @@ export default function SignInPage() {
                   </div>
 
                   <div className="relative">
-                    <Lock className="absolute left-3 top-9 h-5 w-5 text-gray-400" />
+                    <Lock className="absolute left-3 top-9 h-5 w-5 text-muted-foreground" />
                     <InputText
                       label="Password"
                       name="password"
@@ -152,9 +154,9 @@ export default function SignInPage() {
                   <label className="flex items-center gap-2 cursor-pointer">
                     <input
                       type="checkbox"
-                      className="rounded border-gray-300 text-primary focus:ring-primary"
+                      className="rounded border-border text-primary focus:ring-primary"
                     />
-                    <span className="text-gray-600">Remember me</span>
+                    <span className="text-muted-foreground">Remember me</span>
                   </label>
                   <a
                     href="#"
@@ -175,10 +177,10 @@ export default function SignInPage() {
 
                 <div className="relative">
                   <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200"></div>
+                    <div className="w-full border-t border-border"></div>
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-2 bg-white text-gray-500">
+                    <span className="px-2 bg-card text-muted-foreground">
                       Or continue with
                     </span>
                   </div>

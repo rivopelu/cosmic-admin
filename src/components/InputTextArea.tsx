@@ -52,9 +52,9 @@ export default function InputTextArea(props: IProps) {
         />
       )}
       <div>
-        <div className={cn('relative flex dark:bg-card bg-white')}>
+        <div className={cn('relative flex bg-background')}>
           {props.startIcon && (
-            <span className="absolute text-gray-500 left-3 top-3 flex items-center pr-3">
+            <span className="absolute text-muted-foreground left-3 top-3 flex items-center pr-3">
               {props.startIcon}
             </span>
           )}
@@ -75,7 +75,7 @@ export default function InputTextArea(props: IProps) {
             id={props.id}
           />
           {props.endIcon && (
-            <span className="absolute text-gray-500 right-3 top-3 flex items-center pl-3">
+            <span className="absolute text-muted-foreground right-3 top-3 flex items-center pl-3">
               {props.endIcon}
             </span>
           )}
@@ -84,7 +84,7 @@ export default function InputTextArea(props: IProps) {
           <p
             className={cn(
               'text-xs mt-1',
-              errorMessage ? 'text-red-500' : 'text-gray-500',
+              errorMessage ? 'text-red-500' : 'text-muted-foreground',
             )}
           >
             {errorMessage || props.helperText}

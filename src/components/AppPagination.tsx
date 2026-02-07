@@ -64,7 +64,7 @@ export default function AppPagination(props: IProps) {
                 <SelectItem value="50">50</SelectItem>
               </SelectContent>
             </Select>
-            <span className="text-sm text-gray-500">Rows per page</span>
+            <span className="text-sm text-muted-foreground">Rows per page</span>
           </div>
 
           <Pagination
@@ -73,7 +73,7 @@ export default function AppPagination(props: IProps) {
             onPageChange={handlePageChange}
           />
 
-          <div className="text-sm text-gray-500">
+          <div className="text-sm text-muted-foreground">
             {totalData > 0 ? (
               <>
                 Showing {startItem}-{endItem} of {totalData} items

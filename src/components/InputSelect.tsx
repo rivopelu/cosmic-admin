@@ -97,7 +97,7 @@ export default function InputSelect(props: IProps) {
               aria-expanded={open}
               disabled={props.disabled}
               className={cn(
-                'w-full justify-between font-normal bg-white dark:bg-card',
+                'w-full justify-between font-normal bg-background dark:bg-card',
                 !selectedOption && 'text-muted-foreground',
                 errorMessage ? 'outline-red-500 border-red-500 bg-red-50' : '',
               )}

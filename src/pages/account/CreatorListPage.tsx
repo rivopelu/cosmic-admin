@@ -28,10 +28,12 @@ export default function CreatorListPage() {
         <div className="flex items-center gap-3">
           <AppAvatar src={data.profile_picture} alt={data.artist_name} />
           <div>
-            <div className="font-semibold text-gray-900">
+            <div className="font-semibold text-foreground">
               {data.artist_name}
             </div>
-            <div className="text-xs text-gray-500">@{data.username}</div>
+            <div className="text-xs text-muted-foreground">
+              @{data.username}
+            </div>
           </div>
         </div>
       ),
@@ -49,9 +51,9 @@ export default function CreatorListPage() {
       sortParam: 'created_date',
       component: (data: IResCreatorList) =>
         data.created_date ? (
-          <div className="text-gray-600">
+          <div className="text-muted-foreground">
             {DateHelper.toFormatDate(data.created_date, 'MMM dd, yyyy')}
-            <div className="text-xs text-gray-400">
+            <div className="text-xs text-muted-foreground">
               {DateHelper.toFormatDate(data.created_date, 'HH:mm:ss')}
             </div>
           </div>
@@ -82,7 +84,7 @@ export default function CreatorListPage() {
       {/* Page Header */}
       <div className="mb-6">
         <PageTitle title="Creator Management" />
-        <p className="text-sm text-gray-600 mt-1">
+        <p className="text-sm text-muted-foreground mt-1">
           Manage and monitor all creator accounts in the system
         </p>
       </div>

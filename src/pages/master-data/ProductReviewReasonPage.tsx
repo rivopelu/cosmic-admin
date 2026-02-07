@@ -27,13 +27,13 @@ export default function ProductReviewReasonPage() {
     {
       headerTitle: 'Title',
       component: (data: IResProductReviewReason) => (
-        <div className="font-semibold text-gray-900">{data.title}</div>
+        <div className="font-semibold text-foreground">{data.title}</div>
       ),
     },
     {
       headerTitle: 'Description',
       component: (data: IResProductReviewReason) => (
-        <div className="text-gray-700">{data.description}</div>
+        <div className="text-muted-foreground">{data.description}</div>
       ),
     },
     {
@@ -60,7 +60,7 @@ export default function ProductReviewReasonPage() {
             size="icon"
             onClick={() => page.handleDelete(data)}
           >
-            <Trash2 className="size-4 text-red-500" />
+            <Trash2 className="size-4 text-destructive" />
           </Button>
         </div>
       ),

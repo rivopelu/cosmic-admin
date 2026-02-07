@@ -45,18 +45,18 @@ export default function AppTable(props: IProps) {
       {!loading && data.length === 0 ? (
         <CardEmpty />
       ) : (
-        <div className="rounded-sm border-gray-200 bg-white  overflow-hidden">
+        <div className="rounded-sm bg-card  overflow-hidden">
           <Table disableBorder={disableBorder}>
             <TableHeader>
-              <TableRow className="bg-linear-to-r from-gray-50 to-gray-100 hover:from-gray-50 hover:to-gray-100 border-b-2 border-gray-200">
+              <TableRow className="bg-card ">
                 {column.map((header, i) => (
                   <TableHead
                     className={cn(
-                      'text-xs font-semibold uppercase tracking-wide text-gray-700 py-4',
+                      'text-xs font-semibold uppercase tracking-wide text-gray-200 py-4',
                       i === 0 && 'pl-6',
                       i === column.length - 1 && 'pr-6',
                       header.sortParam &&
-                        'cursor-pointer select-none hover:text-primary transition-colors',
+                        'cursor-pointer select-none hover:text-white transition-colors',
                     )}
                     key={i}
                     onClick={() => handleHeaderClick(header.sortParam)}
@@ -68,8 +68,8 @@ export default function AppTable(props: IProps) {
                           className={cn(
                             'transition-colors',
                             parsedSort?.field === header.sortParam
-                              ? 'text-primary'
-                              : 'text-gray-400',
+                              ? 'text-gray-50'
+                              : 'text-gray-100',
                           )}
                         >
                           {getSortIcon(header.sortParam)}
@@ -85,7 +85,7 @@ export default function AppTable(props: IProps) {
                 ? Array.from({ length: 10 }).map((_, i) => (
                     <TableRow
                       key={`loading-${i}`}
-                      className="border-b border-gray-100"
+                      className="border-b border-gray-800"
                     >
                       {column.map((_, idx) => (
                         <TableCell
@@ -104,13 +104,13 @@ export default function AppTable(props: IProps) {
                 : data.map((row, i) => (
                     <TableRow
                       key={i}
-                      className="border-b border-gray-100 hover:bg-primary/5 transition-colors"
+                      className="border-b border-gray-800 hover:bg-primary/5 transition-colors"
                     >
                       {column.map((s, idx) => (
                         <TableCell
                           key={idx}
                           className={cn(
-                            'py-4 text-sm text-gray-900',
+                            'py-4 text-sm',
                             idx === 0 && 'pl-6 font-medium',
                             idx === column.length - 1 && 'pr-6',
                           )}

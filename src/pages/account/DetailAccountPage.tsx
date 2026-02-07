@@ -49,19 +49,23 @@ export default function DetailAccountPage() {
   function getStatusBadge() {
     const statusMap = {
       ACTIVE: {
-        color: 'bg-green-100 text-green-700 border-green-300',
+        color:
+          'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-900',
         label: 'Active',
       },
       INACTIVE: {
-        color: 'bg-gray-100 text-gray-700 border-gray-300',
+        color:
+          'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700',
         label: 'Inactive',
       },
       WAITING_EMAIL_VERIFICATION: {
-        color: 'bg-yellow-100 text-yellow-700 border-yellow-300',
+        color:
+          'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-900',
         label: 'Waiting Email Verification',
       },
       WAITING_APPROVAL_CREATOR: {
-        color: 'bg-blue-100 text-blue-700 border-blue-300',
+        color:
+          'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-900',
         label: 'Waiting Approval',
       },
     }
@@ -77,15 +81,18 @@ export default function DetailAccountPage() {
   function getRoleBadge() {
     const roleMap = {
       ADMIN: {
-        color: 'bg-purple-100 text-purple-700 border-purple-300',
+        color:
+          'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-900',
         label: 'Admin',
       },
       CREATOR: {
-        color: 'bg-indigo-100 text-indigo-700 border-indigo-300',
+        color:
+          'bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-400 dark:border-indigo-900',
         label: 'Creator',
       },
       USER: {
-        color: 'bg-slate-100 text-slate-700 border-slate-300',
+        color:
+          'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
         label: 'User',
       },
     }
@@ -214,15 +221,15 @@ export default function DetailAccountPage() {
 
         {/* Rejection Alert */}
         {data?.reject_reason && data?.status !== 'WAITING_APPROVAL_CREATOR' && (
-          <Alert className="bg-red-50 border-red-200">
-            <AlertCircle className="text-red-600" />
-            <AlertTitle className="text-red-800 font-semibold">
+          <Alert className="bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-900">
+            <AlertCircle className="text-red-600 dark:text-red-400" />
+            <AlertTitle className="text-red-800 dark:text-red-300 font-semibold">
               Creator Application Rejected
             </AlertTitle>
-            <AlertDescription className="mt-2 text-red-700">
+            <AlertDescription className="mt-2 text-red-700 dark:text-red-400">
               <p className="mb-3">{data?.reject_reason}</p>
-              <Separator className="my-3 bg-red-200" />
-              <div className="flex gap-6 text-sm text-red-600">
+              <Separator className="my-3 bg-red-200 dark:bg-red-800" />
+              <div className="flex gap-6 text-sm text-red-600 dark:text-red-400">
                 <div className="flex items-center gap-1.5">
                   <User size={14} />
                   <span>Rejected by: {data?.reject_by}</span>
@@ -243,18 +250,18 @@ export default function DetailAccountPage() {
 
         {/* Approval Alert */}
         {data?.approve_by && data?.role_enum === 'CREATOR' && (
-          <Alert className="bg-green-50 border-green-200">
-            <CheckCircle2 className="text-green-600" />
-            <AlertTitle className="text-green-800 font-semibold">
+          <Alert className="bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-900">
+            <CheckCircle2 className="text-green-600 dark:text-green-400" />
+            <AlertTitle className="text-green-800 dark:text-green-300 font-semibold">
               Creator Application Approved
             </AlertTitle>
-            <AlertDescription className="mt-2 text-green-700">
+            <AlertDescription className="mt-2 text-green-700 dark:text-green-400">
               <p className="mb-3">
                 This account has been approved as a creator and can now publish
                 content.
               </p>
-              <Separator className="my-3 bg-green-200" />
-              <div className="flex gap-6 text-sm text-green-600">
+              <Separator className="my-3 bg-green-200 dark:bg-green-800" />
+              <div className="flex gap-6 text-sm text-green-600 dark:text-green-400">
                 <div className="flex items-center gap-1.5">
                   <User size={14} />
                   <span>Approved by: {data?.approve_by}</span>

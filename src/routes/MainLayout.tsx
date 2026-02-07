@@ -13,9 +13,11 @@ export default function MainLayout({ children, type }: IProps) {
         return (
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="bg-transparent">
+            <SidebarInset className="bg-background overflow-hidden">
               <TopBar />
-              <PageContainer>{children}</PageContainer>
+              <div className="flex-1 overflow-y-auto p-4 pt-0">
+                <PageContainer>{children}</PageContainer>
+              </div>
             </SidebarInset>
           </SidebarProvider>
         )
