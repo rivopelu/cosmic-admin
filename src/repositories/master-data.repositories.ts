@@ -5,6 +5,7 @@ import type { IResLabelValue } from '@/types/response/IResLabelValue'
 import type { BaseResponse } from '@/types/response/IResModel'
 import type { IResCreatorType } from '@/types/response/IResCreatorType'
 import type { IResProductReviewReason } from '@/types/response/IResProductReviewReason'
+import type { IResProductTag } from '@/types/response/IResProductTag'
 
 export default class MasterDataRepository {
   httpService = new HttpService()
@@ -172,6 +173,54 @@ export default class MasterDataRepository {
   deleteProductReviewReason(id: string) {
     return this.httpService
       .DELETE(ENDPOINT.DELETE_PRODUCT_REVIEW_REASON(id))
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  getProductTags() {
+    return this.httpService
+      .GET(ENDPOINT.GET_MASTER_DATA_PRODUCT_TAGS())
+      .then((res: BaseResponse<IResProductTag[]>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return []
+      })
+  }
+
+  createProductTag(data: { name: string; description?: string }) {
+    return this.httpService
+      .POST(ENDPOINT.CREATE_PRODUCT_TAG(), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  updateProductTag(id: string, data: { name?: string; description?: string }) {
+    return this.httpService
+      .PUT(ENDPOINT.UPDATE_PRODUCT_TAG(id), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  deleteProductTag(id: string) {
+    return this.httpService
+      .DELETE(ENDPOINT.DELETE_PRODUCT_TAG(id))
       .then((res: BaseResponse<any>) => {
         return res.data
       })

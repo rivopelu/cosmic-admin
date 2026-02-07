@@ -33,4 +33,8 @@ export const ENDPOINT = {
     `/master-data/product-review-reasons/${id}`,
   DELETE_PRODUCT_REVIEW_REASON: (id: string) =>
     `/master-data/product-review-reasons/${id}`,
+  GET_MASTER_DATA_PRODUCT_TAGS: () => '/master-data/product-tags',
+  CREATE_PRODUCT_TAG: () => '/master-data/product-tags',
+  UPDATE_PRODUCT_TAG: (id: string) => `/master-data/product-tags/${id}`,
+  DELETE_PRODUCT_TAG: (id: string) => `/master-data/product-tags/${id}`,
 }

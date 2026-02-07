@@ -78,6 +78,11 @@ const groups: GroupItem[] = [
         url: ROUTES.MASTER_DATA_PRODUCT_REVIEW_REASON(),
         icon: Box,
       },
+      {
+        title: 'Product Tags',
+        url: ROUTES.MASTER_DATA_PRODUCT_TAG(),
+        icon: Box,
+      },
     ],
   },
 ]

@@ -10,6 +10,7 @@ import CreatorProductDetailPage from '@/pages/creator-product/CreatorProductDeta
 import CreatorTypePage from '@/pages/master-data/CreatorTypePage'
 import CreatorProductCategoryPage from '@/pages/master-data/CreatorProductCategoryPage'
 import ProductReviewReasonPage from '@/pages/master-data/ProductReviewReasonPage'
+import ProductTagPage from '@/pages/master-data/ProductTagPage'
 
 export interface RouteConfig {
   module: string
@@ -59,6 +60,12 @@ export const routesConfig: RouteConfig[] = [
     module: 'master-data',
     path: ROUTES.MASTER_DATA_PRODUCT_REVIEW_REASON(),
     component: ProductReviewReasonPage,
+    type: 'PRIMARY',
+  },
+  {
+    module: 'master-data',
+    path: ROUTES.MASTER_DATA_PRODUCT_TAG(),
+    component: ProductTagPage,
     type: 'PRIMARY',
   },
   {

@@ -11,9 +11,9 @@ import { ROUTES } from '@/constants/routes'
 import type { IResCreatorProduct } from '@/types/response/IResCreatorProduct'
 import { formatCurrency } from '@/utils/currency-helper'
 import DateHelper from '@/utils/date-helper'
+import { Link } from '@tanstack/react-router'
 import { InfoIcon } from 'lucide-react'
 import { useCreatorProductListPage } from './useCreatorProductListPage'
-import { Link } from '@tanstack/react-router'
 
 export default function CreatorProductListPage() {
   const page = useCreatorProductListPage()
@@ -127,7 +127,6 @@ export default function CreatorProductListPage() {
             form?.requestSubmit()
           }}
         >
-          {/* TODO: Add filter form with status and category filters */}
           <div className="p-4 text-sm text-muted-foreground">
             Filters will be added here (Status, Category)
           </div>
