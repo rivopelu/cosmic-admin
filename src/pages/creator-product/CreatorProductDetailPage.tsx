@@ -1,4 +1,5 @@
 import type { IBreadcrumbData } from '@/components/Breadcrumbs'
+import CreatorProductStatusText from '@/components/creator-product/CreatorProductStatusText'
 import InputSelect from '@/components/InputSelect'
 import InputTextArea from '@/components/InputTextArea'
 import LoadingCard from '@/components/LoadingCard'
@@ -17,6 +18,7 @@ import {
 } from '@/components/ui/dialog'
 import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/constants/routes'
+import type { CreatorProductStatus } from '@/types/response/IResCreatorProduct'
 import { formatCurrency } from '@/utils/currency-helper'
 import DateHelper from '@/utils/date-helper'
 import { Form, Formik } from 'formik'
@@ -49,48 +51,6 @@ export default function CreatorProductDetailPage() {
       label: data?.name || '',
     },
   ]
-
-  const getStatusBadge = () => {
-    const statusMap = {
-      PUBLISHED: {
-        color:
-          'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-900',
-        label: 'Published',
-      },
-      DRAFT: {
-        color:
-          'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700',
-        label: 'Draft',
-      },
-      PENDING: {
-        color:
-          'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-900',
-        label: 'Pending',
-      },
-      REJECTED: {
-        color:
-          'bg-red-100 text-red-700 border-red-200 dark:bg-red-900/30 dark:text-red-400 dark:border-red-900',
-        label: 'Rejected',
-      },
-      DELETED: {
-        color:
-          'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
-        label: 'Deleted',
-      },
-      ARCHIVED: {
-        color:
-          'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-900',
-        label: 'Archived',
-      },
-    }
-
-    const status = statusMap[data?.status as keyof typeof statusMap]
-    return (
-      <Badge className={status?.color || ''} variant="outline">
-        {status?.label || data?.status}
-      </Badge>
-    )
-  }
 
   const calculateDiscountedPrice = () => {
     if (!data?.discount || !data?.price) return null
@@ -270,7 +230,9 @@ export default function CreatorProductDetailPage() {
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-2">
                 <h2 className="text-2xl font-bold">{data?.name}</h2>
-                {getStatusBadge()}
+                <CreatorProductStatusText
+                  status={data?.status as CreatorProductStatus}
+                />
               </div>
               <p className="text-muted-foreground mb-2">Slug: {data?.slug}</p>
               <p className="text-sm text-muted-foreground">

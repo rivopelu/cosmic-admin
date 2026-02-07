@@ -5,7 +5,7 @@ import FilterList from '@/components/FilterList'
 import InputSearch from '@/components/InputSearch'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
-import { Badge } from '@/components/ui/badge'
+import CreatorProductStatusText from '@/components/creator-product/CreatorProductStatusText'
 import { Button } from '@/components/ui/button'
 import { ROUTES } from '@/constants/routes'
 import type { IResCreatorProduct } from '@/types/response/IResCreatorProduct'
@@ -17,21 +17,6 @@ import { Link } from '@tanstack/react-router'
 
 export default function CreatorProductListPage() {
   const page = useCreatorProductListPage()
-
-  const getStatusVariant = (status: string) => {
-    switch (status) {
-      case 'PUBLISHED':
-        return 'default'
-      case 'PENDING':
-        return 'secondary'
-      case 'REJECTED':
-        return 'destructive'
-      case 'DRAFT':
-        return 'outline'
-      default:
-        return 'secondary'
-    }
-  }
 
   const tableColumn: Array<ITableColumn<IResCreatorProduct>> = [
     {
@@ -70,7 +55,7 @@ export default function CreatorProductListPage() {
     {
       headerTitle: 'Status',
       component: (data: IResCreatorProduct) => (
-        <Badge variant={getStatusVariant(data.status)}>{data.status}</Badge>
+        <CreatorProductStatusText status={data.status} />
       ),
     },
     {

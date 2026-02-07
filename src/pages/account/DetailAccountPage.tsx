@@ -1,7 +1,12 @@
+import AppAvatar from '@/components/AppAvatar'
 import type { IBreadcrumbData } from '@/components/Breadcrumbs'
+import InputText from '@/components/InputText'
 import LoadingCard from '@/components/LoadingCard'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
+import AccountRoleText from '@/components/account/AccountRoleText'
+import AccountStatusText from '@/components/account/AccountStatusText'
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -10,27 +15,24 @@ import {
   DialogDescription,
   DialogTitle,
 } from '@/components/ui/dialog'
+import { Separator } from '@/components/ui/separator'
 import { ROUTES } from '@/constants/routes'
-import { useDetailAccountPage } from './useDetailAccountPage'
-import InputText from '@/components/InputText'
+import type { AccountRoleType, AccountStatusType } from '@/types/types/IAccount'
+import DateHelper from '@/utils/date-helper'
 import { FormikProvider } from 'formik'
-import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import {
   AlertCircle,
-  Clock,
-  User,
-  Mail,
   Calendar,
-  Shield,
   CheckCircle2,
-  XCircle,
-  Palette,
+  Clock,
   Link as LinkIcon,
+  Mail,
+  Palette,
+  Shield,
+  User,
+  XCircle,
 } from 'lucide-react'
-import { Separator } from '@/components/ui/separator'
-import DateHelper from '@/utils/date-helper'
-import AppAvatar from '@/components/AppAvatar'
-import { Badge } from '@/components/ui/badge'
+import { useDetailAccountPage } from './useDetailAccountPage'
 
 export default function DetailAccountPage() {
   const page = useDetailAccountPage()
@@ -45,65 +47,6 @@ export default function DetailAccountPage() {
       label: data?.name || '',
     },
   ]
-
-  function getStatusBadge() {
-    const statusMap = {
-      ACTIVE: {
-        color:
-          'bg-green-100 text-green-700 border-green-200 dark:bg-green-900/30 dark:text-green-400 dark:border-green-900',
-        label: 'Active',
-      },
-      INACTIVE: {
-        color:
-          'bg-gray-100 text-gray-700 border-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-700',
-        label: 'Inactive',
-      },
-      WAITING_EMAIL_VERIFICATION: {
-        color:
-          'bg-yellow-100 text-yellow-700 border-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-400 dark:border-yellow-900',
-        label: 'Waiting Email Verification',
-      },
-      WAITING_APPROVAL_CREATOR: {
-        color:
-          'bg-blue-100 text-blue-700 border-blue-200 dark:bg-blue-900/30 dark:text-blue-400 dark:border-blue-900',
-        label: 'Waiting Approval',
-      },
-    }
-
-    const status = statusMap[data?.status as keyof typeof statusMap]
-    return (
-      <Badge className={status?.color || ''} variant="outline">
-        {status?.label || data?.status_string}
-      </Badge>
-    )
-  }
-
-  function getRoleBadge() {
-    const roleMap = {
-      ADMIN: {
-        color:
-          'bg-purple-100 text-purple-700 border-purple-200 dark:bg-purple-900/30 dark:text-purple-400 dark:border-purple-900',
-        label: 'Admin',
-      },
-      CREATOR: {
-        color:
-          'bg-indigo-100 text-indigo-700 border-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-400 dark:border-indigo-900',
-        label: 'Creator',
-      },
-      USER: {
-        color:
-          'bg-slate-100 text-slate-700 border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700',
-        label: 'User',
-      },
-    }
-
-    const role = roleMap[data?.role_enum as keyof typeof roleMap]
-    return (
-      <Badge className={role?.color || ''} variant="outline">
-        {role?.label || data?.role_enum}
-      </Badge>
-    )
-  }
 
   function dialogReject() {
     return (
@@ -293,8 +236,14 @@ export default function DetailAccountPage() {
                     />
                     <h2 className="text-2xl font-bold">{data?.name}</h2>
                   </div>
-                  {getRoleBadge()}
-                  {getStatusBadge()}
+                  <AccountRoleText
+                    role={data?.role_enum as AccountRoleType}
+                    text={data?.role_enum}
+                  />
+                  <AccountStatusText
+                    status={data?.status as AccountStatusType}
+                    text={data?.status_string}
+                  />
                 </div>
                 <p className="text-muted-foreground mb-1">@{data?.username}</p>
                 {data?.artist_name && (
@@ -345,7 +294,10 @@ export default function DetailAccountPage() {
                 </label>
                 <div className="mt-1.5 flex items-center gap-2">
                   <Shield size={16} className="text-muted-foreground" />
-                  {getRoleBadge()}
+                  <AccountRoleText
+                    role={data?.role_enum as AccountRoleType}
+                    text={data?.role_enum}
+                  />
                 </div>
               </div>
 
@@ -355,7 +307,12 @@ export default function DetailAccountPage() {
                 <label className="text-sm font-medium text-muted-foreground">
                   Account Status
                 </label>
-                <div className="mt-1.5">{getStatusBadge()}</div>
+                <div className="mt-1.5">
+                  <AccountStatusText
+                    status={data?.status as AccountStatusType}
+                    text={data?.status_string}
+                  />
+                </div>
               </div>
             </CardContent>
           </Card>

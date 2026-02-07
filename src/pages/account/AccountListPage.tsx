@@ -7,15 +7,17 @@ import InputSearch from '@/components/InputSearch'
 import InputSelect from '@/components/InputSelect'
 import PageContent from '@/components/PageContent'
 import PageTitle from '@/components/PageTitle'
-import { Badge } from '@/components/ui/badge'
-import type { IResAccountList } from '@/types/response/IResAccountList'
-import DateHelper from '@/utils/date-helper'
-import { Form, Formik } from 'formik'
-import { useAccountListPage } from './useAccountListPage'
+import AccountRoleText from '@/components/account/AccountRoleText'
+import AccountStatusText from '@/components/account/AccountStatusText'
 import { Button } from '@/components/ui/button'
-import { Info } from 'lucide-react'
-import { Link } from '@tanstack/react-router'
 import { ROUTES } from '@/constants/routes'
+import type { IResAccountList } from '@/types/response/IResAccountList'
+import type { AccountRoleType, AccountStatusType } from '@/types/types/IAccount'
+import DateHelper from '@/utils/date-helper'
+import { Link } from '@tanstack/react-router'
+import { Form, Formik } from 'formik'
+import { Info } from 'lucide-react'
+import { useAccountListPage } from './useAccountListPage'
 
 export default function AccountListPage() {
   const page = useAccountListPage()
@@ -44,9 +46,7 @@ export default function AccountListPage() {
     {
       headerTitle: 'Role',
       component: (data: IResAccountList) => (
-        <Badge variant="outline" className="font-medium">
-          {data.role}
-        </Badge>
+        <AccountRoleText role={data.role as AccountRoleType} />
       ),
     },
     {
@@ -64,9 +64,10 @@ export default function AccountListPage() {
     {
       headerTitle: 'Status',
       component: (data: IResAccountList) => (
-        <Badge variant={data.status === 'VERIFIED' ? 'default' : 'secondary'}>
-          {data.status_string}
-        </Badge>
+        <AccountStatusText
+          status={data.status as AccountStatusType}
+          text={data.status_string}
+        />
       ),
     },
     {
