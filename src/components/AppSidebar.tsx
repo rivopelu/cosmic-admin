@@ -83,6 +83,11 @@ const groups: GroupItem[] = [
         url: ROUTES.MASTER_DATA_PRODUCT_TAG(),
         icon: Box,
       },
+      {
+        title: 'Product Tag Categories',
+        url: ROUTES.MASTER_DATA_PRODUCT_TAG_CATEGORY(),
+        icon: Box,
+      },
     ],
   },
 ]

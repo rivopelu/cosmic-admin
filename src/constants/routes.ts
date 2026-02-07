@@ -10,4 +10,5 @@ export const ROUTES = {
     `/master-data/creator-product-category`,
   MASTER_DATA_PRODUCT_REVIEW_REASON: () => `/master-data/product-review-reason`,
   MASTER_DATA_PRODUCT_TAG: () => `/master-data/product-tag`,
+  MASTER_DATA_PRODUCT_TAG_CATEGORY: () => `/master-data/product-tag-category`,
 }

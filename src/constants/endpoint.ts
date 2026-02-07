@@ -37,4 +37,11 @@ export const ENDPOINT = {
   CREATE_PRODUCT_TAG: () => '/master-data/product-tags',
   UPDATE_PRODUCT_TAG: (id: string) => `/master-data/product-tags/${id}`,
   DELETE_PRODUCT_TAG: (id: string) => `/master-data/product-tags/${id}`,
+  GET_MASTER_DATA_PRODUCT_TAG_CATEGORIES: () =>
+    '/master-data/product-tag-categories',
+  CREATE_PRODUCT_TAG_CATEGORY: () => '/master-data/product-tag-categories',
+  UPDATE_PRODUCT_TAG_CATEGORY: (id: string) =>
+    `/master-data/product-tag-categories/${id}`,
+  DELETE_PRODUCT_TAG_CATEGORY: (id: string) =>
+    `/master-data/product-tag-categories/${id}`,
 }

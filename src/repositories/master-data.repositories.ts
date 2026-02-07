@@ -1,11 +1,12 @@
 import { ENDPOINT } from '@/constants/endpoint'
 import ErrorService from '@/services/error.service'
 import { HttpService } from '@/services/htpp.service'
+import type { IResCreatorType } from '@/types/response/IResCreatorType'
 import type { IResLabelValue } from '@/types/response/IResLabelValue'
 import type { BaseResponse } from '@/types/response/IResModel'
-import type { IResCreatorType } from '@/types/response/IResCreatorType'
 import type { IResProductReviewReason } from '@/types/response/IResProductReviewReason'
 import type { IResProductTag } from '@/types/response/IResProductTag'
+import type { IResProductTagCategory } from '@/types/response/IResProductTagCategory'
 
 export default class MasterDataRepository {
   httpService = new HttpService()
@@ -221,6 +222,57 @@ export default class MasterDataRepository {
   deleteProductTag(id: string) {
     return this.httpService
       .DELETE(ENDPOINT.DELETE_PRODUCT_TAG(id))
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  getProductTagCategories() {
+    return this.httpService
+      .GET(ENDPOINT.GET_MASTER_DATA_PRODUCT_TAG_CATEGORIES())
+      .then((res: BaseResponse<IResProductTagCategory[]>) => {
+        return res.data.response_data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        return []
+      })
+  }
+
+  createProductTagCategory(data: { name: string; description?: string }) {
+    return this.httpService
+      .POST(ENDPOINT.CREATE_PRODUCT_TAG_CATEGORY(), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  updateProductTagCategory(
+    id: string,
+    data: { name?: string; description?: string },
+  ) {
+    return this.httpService
+      .PUT(ENDPOINT.UPDATE_PRODUCT_TAG_CATEGORY(id), data)
+      .then((res: BaseResponse<any>) => {
+        return res.data
+      })
+      .catch((e) => {
+        this.errorService.fetchApiError(e)
+        throw e
+      })
+  }
+
+  deleteProductTagCategory(id: string) {
+    return this.httpService
+      .DELETE(ENDPOINT.DELETE_PRODUCT_TAG_CATEGORY(id))
       .then((res: BaseResponse<any>) => {
         return res.data
       })
