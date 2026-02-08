@@ -3,19 +3,32 @@ import PageContainer from '@/components/PageContainer'
 import TopBar from '@/components/TopBar'
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
 import type { PageLayoutType } from '@/types/types/type'
-import type { ReactNode } from 'react'
+import { useLocation } from '@tanstack/react-router'
+import { type ReactNode, useEffect, useRef } from 'react'
 import { Toaster } from '@/components/ui/sonner'
+import { ASSETS } from '@/constants/assets'
 
 export default function MainLayout({ children, type }: IProps) {
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const pathname = useLocation({
+    select: (location) => location.pathname,
+  })
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTo(0, 0)
+    }
+  }, [pathname])
+
   function checking() {
     switch (type) {
       case 'PRIMARY':
         return (
           <SidebarProvider>
             <AppSidebar />
-            <SidebarInset className="bg-background overflow-hidden">
+            <SidebarInset className="overflow-hidden">
               <TopBar />
-              <div className="flex-1 overflow-y-auto p-4 pt-0">
+              <div ref={scrollRef} className="flex-1 overflow-y-auto p-4 pt-0">
                 <PageContainer>{children}</PageContainer>
               </div>
             </SidebarInset>
@@ -24,11 +37,14 @@ export default function MainLayout({ children, type }: IProps) {
       case 'FULL_SCREEN':
         return <>{children}</>
       default:
-        ;<>{children}</>
+        return <>{children}</>
     }
   }
   return (
-    <main className="bg-slate-50">
+    <main
+      className="bg-cover bg-fixed"
+      style={{ backgroundImage: `url(${ASSETS.BG})` }}
+    >
       <Toaster />
       {checking()}
     </main>

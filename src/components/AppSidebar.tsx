@@ -114,7 +114,7 @@ function SidebarItem({ item }: { item: Item }) {
 
 export function AppSidebar() {
   return (
-    <Sidebar className="border-r-0 bg-background" variant="floating">
+    <Sidebar className="border-r-0 " variant="floating">
       <SidebarContent className="bg-card/70 rounded-xl border border-border backdrop-blur-sm shadow-sm">
         {groups.map((group) => (
           <SidebarGroup key={group.label}>
