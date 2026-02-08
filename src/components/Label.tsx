@@ -11,7 +11,7 @@ export default function Label(props: IProps) {
   return (
     <label
       htmlFor={props.htmlFor}
-      className={cn('mb-1 text-sm font-medium  text-gray-700', props.className)}
+      className={cn('mb-1 text-sm font-medium  text-gray-300', props.className)}
     >
       {props.label}
       {props.required && <span className={'text-red-700'}> *</span>}

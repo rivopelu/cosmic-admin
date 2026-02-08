@@ -14,7 +14,7 @@ export function useCreatorProductCategoryPage() {
     useState<IResCreatorProductCategory | null>(null)
 
   const queryList = useQuery({
-    queryKey: ['list_creator_product_categories'],
+    queryKey: ['list_creator_product_categories_1'],
     queryFn: async () =>
       await masterDataRepository.getCreatorProductCategories(),
   })
