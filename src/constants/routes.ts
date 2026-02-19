@@ -11,4 +11,6 @@ export const ROUTES = {
   MASTER_DATA_PRODUCT_REVIEW_REASON: () => `/master-data/product-review-reason`,
   MASTER_DATA_PRODUCT_TAG: () => `/master-data/product-tag`,
   MASTER_DATA_PRODUCT_TAG_CATEGORY: () => `/master-data/product-tag-category`,
+  SUBSCRIPTION_PLAN_LIST: () => '/subscription-plan' as const,
+  SUBSCRIPTION_PLAN_DETAIL: (id: string) => `/subscription-plan/${id}` as const,
 }

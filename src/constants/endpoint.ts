@@ -44,4 +44,10 @@ export const ENDPOINT = {
     `/master-data/product-tag-categories/${id}`,
   DELETE_PRODUCT_TAG_CATEGORY: (id: string) =>
     `/master-data/product-tag-categories/${id}`,
+  GET_SUBSCRIPTION_PLAN_LIST: () => '/subscription/admin/plans',
+  GET_SUBSCRIPTION_PLAN_DETAIL: (id: string) =>
+    `/subscription/admin/plans/${id}`,
+  APPROVE_SUBSCRIPTION_PLAN: (id: string) =>
+    `/subscription/plans/${id}/approve`,
+  REJECT_SUBSCRIPTION_PLAN: (id: string) => `/subscription/plans/${id}/reject`,
 }

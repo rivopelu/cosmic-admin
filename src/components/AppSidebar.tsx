@@ -58,6 +58,11 @@ const groups: GroupItem[] = [
         url: ROUTES.CREATOR_PRODUCT_LIST(),
         icon: ShoppingBag,
       },
+      {
+        title: 'Subscription Plans',
+        url: ROUTES.SUBSCRIPTION_PLAN_LIST(),
+        icon: ShoppingBag,
+      },
     ],
   },
   {

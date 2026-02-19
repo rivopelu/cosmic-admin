@@ -12,6 +12,8 @@ import CreatorProductCategoryPage from '@/pages/master-data/CreatorProductCatego
 import ProductReviewReasonPage from '@/pages/master-data/ProductReviewReasonPage'
 import ProductTagPage from '@/pages/master-data/ProductTagPage'
 import ProductTagCategoryPage from '@/pages/master-data/ProductTagCategoryPage'
+import SubscriptionPlanListPage from '@/pages/subscription-plan/SubscriptionPlanListPage'
+import SubscriptionPlanDetailPage from '@/pages/subscription-plan/SubscriptionPlanDetailPage'
 
 export interface RouteConfig {
   module: string
@@ -117,6 +119,27 @@ export const routesConfig: RouteConfig[] = [
     module: 'creator-product',
     path: ROUTES.CREATOR_PRODUCT_DETAIL('$id'),
     component: CreatorProductDetailPage,
+    type: 'PRIMARY',
+  },
+  {
+    module: 'subscription-plan',
+    path: ROUTES.SUBSCRIPTION_PLAN_LIST(),
+    component: SubscriptionPlanListPage,
+    type: 'PRIMARY',
+    validateSearch: (search: Record<string, unknown>) => {
+      return {
+        q: (search.q as string) || undefined,
+        page: Number(search.page) || 0,
+        size: Number(search.size) || 10,
+        status: (search.status as string) || undefined,
+        sort: (search.sort as string) || undefined,
+      }
+    },
+  },
+  {
+    module: 'subscription-plan',
+    path: ROUTES.SUBSCRIPTION_PLAN_DETAIL('$id'),
+    component: SubscriptionPlanDetailPage,
     type: 'PRIMARY',
   },
   {
